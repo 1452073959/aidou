@@ -42,11 +42,46 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection password
      * @property Grid\Column|Collection avatar
      * @property Grid\Column|Collection remember_token
+     * @property Grid\Column|Collection img
+     * @property Grid\Column|Collection url
+     * @property Grid\Column|Collection boxnum
+     * @property Grid\Column|Collection max
+     * @property Grid\Column|Collection min
      * @property Grid\Column|Collection backimage
      * @property Grid\Column|Collection influencenum
+     * @property Grid\Column|Collection frameid
+     * @property Grid\Column|Collection userid
+     * @property Grid\Column|Collection amcode
+     * @property Grid\Column|Collection fine
+     * @property Grid\Column|Collection brand
+     * @property Grid\Column|Collection place
+     * @property Grid\Column|Collection category
+     * @property Grid\Column|Collection norms
+     * @property Grid\Column|Collection units
+     * @property Grid\Column|Collection phr
+     * @property Grid\Column|Collection price
+     * @property Grid\Column|Collection remarks
+     * @property Grid\Column|Collection coefficient
+     * @property Grid\Column|Collection important
+     * @property Grid\Column|Collection in_price
+     * @property Grid\Column|Collection time
+     * @property Grid\Column|Collection type
+     * @property Grid\Column|Collection sum
      * @property Grid\Column|Collection email
      * @property Grid\Column|Collection token
-     * @property Grid\Column|Collection email_verified_at
+     * @property Grid\Column|Collection celebrity_id
+     * @property Grid\Column|Collection y
+     * @property Grid\Column|Collection m
+     * @property Grid\Column|Collection d
+     * @property Grid\Column|Collection w
+     * @property Grid\Column|Collection mingci
+     * @property Grid\Column|Collection nickname
+     * @property Grid\Column|Collection weapp_avatar
+     * @property Grid\Column|Collection weapp_openid
+     * @property Grid\Column|Collection defaultaddress_id
+     * @property Grid\Column|Collection diamondnum
+     * @property Grid\Column|Collection votenum
+     * @property Grid\Column|Collection box
      *
      * @method Grid\Column|Collection name(string $label = null)
      * @method Grid\Column|Collection version(string $label = null)
@@ -79,11 +114,46 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection password(string $label = null)
      * @method Grid\Column|Collection avatar(string $label = null)
      * @method Grid\Column|Collection remember_token(string $label = null)
+     * @method Grid\Column|Collection img(string $label = null)
+     * @method Grid\Column|Collection url(string $label = null)
+     * @method Grid\Column|Collection boxnum(string $label = null)
+     * @method Grid\Column|Collection max(string $label = null)
+     * @method Grid\Column|Collection min(string $label = null)
      * @method Grid\Column|Collection backimage(string $label = null)
      * @method Grid\Column|Collection influencenum(string $label = null)
+     * @method Grid\Column|Collection frameid(string $label = null)
+     * @method Grid\Column|Collection userid(string $label = null)
+     * @method Grid\Column|Collection amcode(string $label = null)
+     * @method Grid\Column|Collection fine(string $label = null)
+     * @method Grid\Column|Collection brand(string $label = null)
+     * @method Grid\Column|Collection place(string $label = null)
+     * @method Grid\Column|Collection category(string $label = null)
+     * @method Grid\Column|Collection norms(string $label = null)
+     * @method Grid\Column|Collection units(string $label = null)
+     * @method Grid\Column|Collection phr(string $label = null)
+     * @method Grid\Column|Collection price(string $label = null)
+     * @method Grid\Column|Collection remarks(string $label = null)
+     * @method Grid\Column|Collection coefficient(string $label = null)
+     * @method Grid\Column|Collection important(string $label = null)
+     * @method Grid\Column|Collection in_price(string $label = null)
+     * @method Grid\Column|Collection time(string $label = null)
+     * @method Grid\Column|Collection type(string $label = null)
+     * @method Grid\Column|Collection sum(string $label = null)
      * @method Grid\Column|Collection email(string $label = null)
      * @method Grid\Column|Collection token(string $label = null)
-     * @method Grid\Column|Collection email_verified_at(string $label = null)
+     * @method Grid\Column|Collection celebrity_id(string $label = null)
+     * @method Grid\Column|Collection y(string $label = null)
+     * @method Grid\Column|Collection m(string $label = null)
+     * @method Grid\Column|Collection d(string $label = null)
+     * @method Grid\Column|Collection w(string $label = null)
+     * @method Grid\Column|Collection mingci(string $label = null)
+     * @method Grid\Column|Collection nickname(string $label = null)
+     * @method Grid\Column|Collection weapp_avatar(string $label = null)
+     * @method Grid\Column|Collection weapp_openid(string $label = null)
+     * @method Grid\Column|Collection defaultaddress_id(string $label = null)
+     * @method Grid\Column|Collection diamondnum(string $label = null)
+     * @method Grid\Column|Collection votenum(string $label = null)
+     * @method Grid\Column|Collection box(string $label = null)
      */
     class Grid {}
 
@@ -121,11 +191,46 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection password
      * @property Show\Field|Collection avatar
      * @property Show\Field|Collection remember_token
+     * @property Show\Field|Collection img
+     * @property Show\Field|Collection url
+     * @property Show\Field|Collection boxnum
+     * @property Show\Field|Collection max
+     * @property Show\Field|Collection min
      * @property Show\Field|Collection backimage
      * @property Show\Field|Collection influencenum
+     * @property Show\Field|Collection frameid
+     * @property Show\Field|Collection userid
+     * @property Show\Field|Collection amcode
+     * @property Show\Field|Collection fine
+     * @property Show\Field|Collection brand
+     * @property Show\Field|Collection place
+     * @property Show\Field|Collection category
+     * @property Show\Field|Collection norms
+     * @property Show\Field|Collection units
+     * @property Show\Field|Collection phr
+     * @property Show\Field|Collection price
+     * @property Show\Field|Collection remarks
+     * @property Show\Field|Collection coefficient
+     * @property Show\Field|Collection important
+     * @property Show\Field|Collection in_price
+     * @property Show\Field|Collection time
+     * @property Show\Field|Collection type
+     * @property Show\Field|Collection sum
      * @property Show\Field|Collection email
      * @property Show\Field|Collection token
-     * @property Show\Field|Collection email_verified_at
+     * @property Show\Field|Collection celebrity_id
+     * @property Show\Field|Collection y
+     * @property Show\Field|Collection m
+     * @property Show\Field|Collection d
+     * @property Show\Field|Collection w
+     * @property Show\Field|Collection mingci
+     * @property Show\Field|Collection nickname
+     * @property Show\Field|Collection weapp_avatar
+     * @property Show\Field|Collection weapp_openid
+     * @property Show\Field|Collection defaultaddress_id
+     * @property Show\Field|Collection diamondnum
+     * @property Show\Field|Collection votenum
+     * @property Show\Field|Collection box
      *
      * @method Show\Field|Collection name(string $label = null)
      * @method Show\Field|Collection version(string $label = null)
@@ -158,11 +263,46 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection password(string $label = null)
      * @method Show\Field|Collection avatar(string $label = null)
      * @method Show\Field|Collection remember_token(string $label = null)
+     * @method Show\Field|Collection img(string $label = null)
+     * @method Show\Field|Collection url(string $label = null)
+     * @method Show\Field|Collection boxnum(string $label = null)
+     * @method Show\Field|Collection max(string $label = null)
+     * @method Show\Field|Collection min(string $label = null)
      * @method Show\Field|Collection backimage(string $label = null)
      * @method Show\Field|Collection influencenum(string $label = null)
+     * @method Show\Field|Collection frameid(string $label = null)
+     * @method Show\Field|Collection userid(string $label = null)
+     * @method Show\Field|Collection amcode(string $label = null)
+     * @method Show\Field|Collection fine(string $label = null)
+     * @method Show\Field|Collection brand(string $label = null)
+     * @method Show\Field|Collection place(string $label = null)
+     * @method Show\Field|Collection category(string $label = null)
+     * @method Show\Field|Collection norms(string $label = null)
+     * @method Show\Field|Collection units(string $label = null)
+     * @method Show\Field|Collection phr(string $label = null)
+     * @method Show\Field|Collection price(string $label = null)
+     * @method Show\Field|Collection remarks(string $label = null)
+     * @method Show\Field|Collection coefficient(string $label = null)
+     * @method Show\Field|Collection important(string $label = null)
+     * @method Show\Field|Collection in_price(string $label = null)
+     * @method Show\Field|Collection time(string $label = null)
+     * @method Show\Field|Collection type(string $label = null)
+     * @method Show\Field|Collection sum(string $label = null)
      * @method Show\Field|Collection email(string $label = null)
      * @method Show\Field|Collection token(string $label = null)
-     * @method Show\Field|Collection email_verified_at(string $label = null)
+     * @method Show\Field|Collection celebrity_id(string $label = null)
+     * @method Show\Field|Collection y(string $label = null)
+     * @method Show\Field|Collection m(string $label = null)
+     * @method Show\Field|Collection d(string $label = null)
+     * @method Show\Field|Collection w(string $label = null)
+     * @method Show\Field|Collection mingci(string $label = null)
+     * @method Show\Field|Collection nickname(string $label = null)
+     * @method Show\Field|Collection weapp_avatar(string $label = null)
+     * @method Show\Field|Collection weapp_openid(string $label = null)
+     * @method Show\Field|Collection defaultaddress_id(string $label = null)
+     * @method Show\Field|Collection diamondnum(string $label = null)
+     * @method Show\Field|Collection votenum(string $label = null)
+     * @method Show\Field|Collection box(string $label = null)
      */
     class Show {}
 

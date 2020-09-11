@@ -16,4 +16,9 @@ class Ranking extends Model
     {
        return  $this->belongsTo(Celebrity::class);
     }
+
+    public function user()
+    {
+        return  $this->belongsTo(User::class);
+    }
 }

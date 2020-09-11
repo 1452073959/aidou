@@ -14,5 +14,9 @@ Route::group([
 
     $router->get('/', 'HomeController@index');
     $router->resource('celebrity', 'CelebrityController');
+    //抽奖奖品
+    $router->resource('lottery', 'LotteryController');
+    //banner
 
+    $router->resource('banner', 'BannerController');
 });

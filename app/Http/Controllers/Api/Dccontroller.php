@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Ranking;
 use Illuminate\Support\Facades\DB;
 use Redis;
+
 class Dccontroller extends Controller
 {
     //
@@ -19,6 +20,7 @@ class Dccontroller extends Controller
         $data = $request->all();
         $app = \EasyWeChat::miniProgram();
         $wq = $app->auth->session($data['code']); // $code 为wx.login里的code
+//        dd($wq);
         if (isset($wq['errcode'])) {
             return $this->failed('code已过期或不正确');
         }
@@ -44,62 +46,56 @@ class Dccontroller extends Controller
         return $this->respondWithToken($token);
     }
 
-    public function rank()
+    public function rank(Request $request)
     {
-        $movies = collect([
-            ['name' => 'Back To the Future', 'genre' => 'scifi', 'rating' => 8],
-            ['name' => 'The Matrix',  'genre' => 'fantasy', 'rating' => 9],
-            ['name' => 'The Croods',  'genre' => 'animation', 'rating' => 8],
-            ['name' => 'Zootopia',  'genre' => 'animation', 'rating' => 4],
-            ['name' => 'The Jungle Book',  'genre' => 'fantasy', 'rating' => 5],
-        ]);
-//
-        $genre = $movies->groupBy('rating');
+        $data=$request->all();
+        $num=request('num', -1);
+        $where=[];
+        $y = date('Y', time());
+        $m = date('m', time());
+        $w = date('W', time());
+        $y=request('y', $y);
+        $m=request('m', $m);
+        $w=request('w', $w);
 
-    $rank=  Ranking::with('celebrity')->get();
+        $where = ['y'=>$y,'m'=>$m,'w'=>$w];
 
+        $rank = Ranking::with('celebrity')->where($where)->get();
+//                dd($rank);
         $genre = $rank->groupBy('celebrity_id');
-    dump($movies->toarray());
-    dump($rank->toarray());
-    dump($genre->toArray())  ;
-//       return $rank;
-
-            dump($rank->toarray());
-
-            foreach ($genre as $k=>$v)
-            {
-                dump($v->toarray());
-                $sum=0;
-                foreach ($v as $k1=>$v2)
-                {
-
-                    $sum += (int) $v2['mingci'];
-
-                    Redis::zadd('zset1',$sum,$v2['celebrity_id']);
-                }
-
+        foreach ($genre as $k => $v) {
+            $sum = 0;
+            foreach ($v as $k1 => $v2) {
+                $sum += (int)$v2['mingci'];
+                Redis::zadd('zset1', $sum, $v2['celebrity']);
             }
-//        $data = \Redis::zrange('zset1',0,-1);//返回有序集合的所有值
+        }
+//        //正序
+//       dump(Redis::zrange("zset1",0,-1,'withscores'));
+//        //倒序
+//      dump(Redis::zrevrange("zset1",0,-1));
+//      dump(Redis::scan("zset1",0,-1));
+        $data = Redis::zrevrange('zset1',0,$num,'withscores');//返回有序集合的所有值
+//        var_dump($data);
+//        return $data;
+//     return json_encode($data);
 //    echo  Redis::zadd('zset1',1,'ab11');
 //    echo  Redis::zadd('zset1',2,'cd');
 //    echo  Redis::zadd('zset1',3,'ef');
-    return  Redis::zrange('zset1',0,-1);
+        return $this->success($data);
     }
 
     public function topiao()
     {
- 
 
 
     }
-
-
 
 
     public static function getWeeks($date = '')
     {
         $date = date('Y-m-d', time());
-        echo date('W', strtotime($date))-1;
+        echo date('W', strtotime($date)) - 1;
     }
 
 
@@ -121,14 +117,10 @@ class Dccontroller extends Controller
         return $date;
     }
 
-    /** 
-
-     * 获取某年第几周的开始日期和结束日期 
-
-     * @param int $year 
-
-     * @param int $week 第几周; 
-
+    /**
+     * 获取某年第几周的开始日期和结束日期
+     * @param int $year
+     * @param int $week 第几周;
      */
 
     public function weekday($year, $week = 1)
@@ -161,7 +153,7 @@ class Dccontroller extends Controller
 
             $weekday['start'] = strtotime('+' . ($week - 0) . ' monday', $start);
         }
-        $a['start'] =  date('Y-m-s', $weekday['start']);
+        $a['start'] = date('Y-m-s', $weekday['start']);
         // 第几周的结束时间 
 
         $weekday['end'] = strtotime('+1 sunday', $weekday['start']);
@@ -169,7 +161,7 @@ class Dccontroller extends Controller
         if (date('Y', $weekday['end']) != $year) {
 
             //  $weekday['end'] = $year_end; 
-            $weekday['end'] =   date('Y-m-s h:i:s', $year_end);
+            $weekday['end'] = date('Y-m-s h:i:s', $year_end);
         }
         $a['end'] = date('Y-m-s', $weekday['end']);
 

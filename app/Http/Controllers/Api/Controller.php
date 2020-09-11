@@ -221,4 +221,50 @@ class Controller extends BaseController
         return $verify;
     }
 
+    //每周时间
+    public function weekday($year, $week = 1)
+    {
+
+        $year_start = mktime(0, 0, 0, 1, 1, $year);
+
+        $year_end = mktime(0, 0, 0, 12, 31, $year);
+
+        // 判断第一天是否为第一周的开始
+
+        if (intval(date('W', $year_start)) === 1) {
+
+            $start = $year_start; //把第一天做为第一周的开始
+
+        } else {
+
+            $week++;
+
+            $start = strtotime('+1 monday', $year_start); //把第一个周一作为开始
+
+        }
+        $a = [];
+        // 第几周的开始时间
+
+        if ($week === 1) {
+
+            $weekday['start'] = $start;
+        } else {
+
+            $weekday['start'] = strtotime('+' . ($week - 0) . ' monday', $start);
+        }
+        $a['start'] = date('Y-m-s', $weekday['start']);
+        // 第几周的结束时间
+
+        $weekday['end'] = strtotime('+1 sunday', $weekday['start']);
+
+        if (date('Y', $weekday['end']) != $year) {
+
+            //  $weekday['end'] = $year_end;
+            $weekday['end'] = date('Y-m-s h:i:s', $year_end);
+        }
+        $a['end'] = date('Y-m-s', $weekday['end']);
+
+        return $weekday;
+    }
+
 }

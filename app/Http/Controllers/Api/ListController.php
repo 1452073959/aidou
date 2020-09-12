@@ -7,7 +7,7 @@ use App\Models\Celebrity;
 use Illuminate\Http\Request;
 use App\Models\Ranking;
 use Illuminate\Support\Facades\DB;
-use Redis;
+use Illuminate\Support\Facades\Redis;
 class ListController extends Controller
 {
     //获取有哪些月份

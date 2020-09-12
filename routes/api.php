@@ -17,8 +17,8 @@ $api->version('v1', [
         Route::post('useradd', 'Api\UserController@updateuser');
         //d打榜
         Route::post('rankadd', 'Api\ListController@rankadd');
-
-
+        //本人投过票的
+        $api->any('merank', 'ListController@merank');
     });
 
     // 登录
@@ -44,7 +44,8 @@ $api->version('v1', [
     $api->any('banner', 'ElseController@banner');
     //粉丝榜
     $api->any('fanlist', 'ListController@fanlist');
-    //
+
+
     Route::get('version', function() {
         return 'this is version v1';
     })->name('version');

@@ -32,7 +32,8 @@ class ListController extends Controller
         $y = date('Y', time());
         $w = date('W', time());
         $y=request('y', $y);
-        $w=request('w', $w);
+        $w=request('w', $w-1);
+
       return $this->success( $this->weekday($y,$w));
     }
 
@@ -104,11 +105,12 @@ class ListController extends Controller
         }
 
 
+
     }
     //明星排名/影响力
-    public function celeberrank()
+    public function celeberrank(Request $request)
     {
-        $celebr=Celebrity::find(3);
+        $celebr=Celebrity::find($request->input('celebrity_id'));
        $order= Redis::zrank ('zset1',$celebr);
        $b= Redis::zscore ('zset1',$celebr);
        return $this->success(['user'=>$celebr,'order'=>$order,'sum'=>$b]);
@@ -147,6 +149,31 @@ class ListController extends Controller
             }
         }
         return $this->success($fanlist);
+    }
+    //本人投过的
+    public function merank()
+    {
+        $where=[];
+        $y = date('Y', time());
+        $m = date('m', time());
+        $w = date('W', time())-1;
+        $y=request('y', $y);
+        $m=request('m', $m);
+        $w=request('w', $w);
+        $user = auth('api')->user();
+
+        $where = ['y'=>$y,'m'=>$m,'w'=>(string)$w,'user_id'=>$user['id']];
+        $rank = Ranking::with('celebrity')->where($where)->get();
+        $genre = $rank->groupBy('celebrity_id');
+        foreach ($genre as $k => $v) {
+            $sum = 0;
+            foreach ($v as $k1 => $v2) {
+                $sum += (int)$v2['mingci'];
+                Redis::zadd($user['id'], $sum, $v2['celebrity']);
+            }
+        }
+        $data = Redis::zrevrange('zset1',0,1,'withscores');//返回有序集合的所有值
+        return $this->success($data);
     }
 
 

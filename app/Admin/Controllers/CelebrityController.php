@@ -21,8 +21,8 @@ class CelebrityController extends AdminController
             $grid->column('id')->sortable();
             $grid->column('name');
             $grid->column('avatar');
-            $grid->column('backimage');
-            $grid->column('influencenum');
+            $grid->column('backimage')->image();
+            $grid->column('influencenum')->image();
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
         

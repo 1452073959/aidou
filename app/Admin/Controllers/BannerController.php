@@ -19,7 +19,7 @@ class BannerController extends AdminController
     {
         return Grid::make(new Banner(), function (Grid $grid) {
             $grid->column('id')->sortable();
-            $grid->column('img');
+            $grid->column('img')->image();
             $grid->column('url');
         
             $grid->filter(function (Grid\Filter $filter) {

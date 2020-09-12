@@ -20,9 +20,9 @@ class CelebrityController extends AdminController
         return Grid::make(new Celebrity(), function (Grid $grid) {
             $grid->column('id')->sortable();
             $grid->column('name');
-            $grid->column('avatar');
+            $grid->column('avatar')->image();
             $grid->column('backimage')->image();
-            $grid->column('influencenum')->image();
+            $grid->column('influencenum');
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
         

@@ -34,9 +34,7 @@ class UserController extends Controller
             $flight->save();
             return $this->success('领取成功');
         }else{
-           return $this->failed('错误');
+           return $this->success('错误');
         }
-
-
     }
 }

@@ -49,6 +49,9 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection min
      * @property Grid\Column|Collection backimage
      * @property Grid\Column|Collection influencenum
+     * @property Grid\Column|Collection speed_id
+     * @property Grid\Column|Collection last_time
+     * @property Grid\Column|Collection collect
      * @property Grid\Column|Collection frameid
      * @property Grid\Column|Collection userid
      * @property Grid\Column|Collection amcode
@@ -75,6 +78,9 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection d
      * @property Grid\Column|Collection w
      * @property Grid\Column|Collection mingci
+     * @property Grid\Column|Collection grade
+     * @property Grid\Column|Collection num
+     * @property Grid\Column|Collection upgrade
      * @property Grid\Column|Collection nickname
      * @property Grid\Column|Collection weapp_avatar
      * @property Grid\Column|Collection weapp_openid
@@ -121,6 +127,9 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection min(string $label = null)
      * @method Grid\Column|Collection backimage(string $label = null)
      * @method Grid\Column|Collection influencenum(string $label = null)
+     * @method Grid\Column|Collection speed_id(string $label = null)
+     * @method Grid\Column|Collection last_time(string $label = null)
+     * @method Grid\Column|Collection collect(string $label = null)
      * @method Grid\Column|Collection frameid(string $label = null)
      * @method Grid\Column|Collection userid(string $label = null)
      * @method Grid\Column|Collection amcode(string $label = null)
@@ -147,6 +156,9 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection d(string $label = null)
      * @method Grid\Column|Collection w(string $label = null)
      * @method Grid\Column|Collection mingci(string $label = null)
+     * @method Grid\Column|Collection grade(string $label = null)
+     * @method Grid\Column|Collection num(string $label = null)
+     * @method Grid\Column|Collection upgrade(string $label = null)
      * @method Grid\Column|Collection nickname(string $label = null)
      * @method Grid\Column|Collection weapp_avatar(string $label = null)
      * @method Grid\Column|Collection weapp_openid(string $label = null)
@@ -198,6 +210,9 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection min
      * @property Show\Field|Collection backimage
      * @property Show\Field|Collection influencenum
+     * @property Show\Field|Collection speed_id
+     * @property Show\Field|Collection last_time
+     * @property Show\Field|Collection collect
      * @property Show\Field|Collection frameid
      * @property Show\Field|Collection userid
      * @property Show\Field|Collection amcode
@@ -224,6 +239,9 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection d
      * @property Show\Field|Collection w
      * @property Show\Field|Collection mingci
+     * @property Show\Field|Collection grade
+     * @property Show\Field|Collection num
+     * @property Show\Field|Collection upgrade
      * @property Show\Field|Collection nickname
      * @property Show\Field|Collection weapp_avatar
      * @property Show\Field|Collection weapp_openid
@@ -270,6 +288,9 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection min(string $label = null)
      * @method Show\Field|Collection backimage(string $label = null)
      * @method Show\Field|Collection influencenum(string $label = null)
+     * @method Show\Field|Collection speed_id(string $label = null)
+     * @method Show\Field|Collection last_time(string $label = null)
+     * @method Show\Field|Collection collect(string $label = null)
      * @method Show\Field|Collection frameid(string $label = null)
      * @method Show\Field|Collection userid(string $label = null)
      * @method Show\Field|Collection amcode(string $label = null)
@@ -296,6 +317,9 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection d(string $label = null)
      * @method Show\Field|Collection w(string $label = null)
      * @method Show\Field|Collection mingci(string $label = null)
+     * @method Show\Field|Collection grade(string $label = null)
+     * @method Show\Field|Collection num(string $label = null)
+     * @method Show\Field|Collection upgrade(string $label = null)
      * @method Show\Field|Collection nickname(string $label = null)
      * @method Show\Field|Collection weapp_avatar(string $label = null)
      * @method Show\Field|Collection weapp_openid(string $label = null)

@@ -18,7 +18,13 @@ $api->version('v1', [
         //d打榜
         Route::post('rankadd', 'Api\ListController@rankadd');
         //本人投过票的
-        $api->any('merank', 'ListController@merank');
+        $api->any('merank', 'Api\ListController@merank');
+        //钻石接口
+        $api->get('collect', 'Api\TreeController@collect');
+        //收取钻石
+        $api->get('take', 'Api\TreeController@take');
+        //s升级
+        $api->get('upgrade', 'Api\TreeController@upgrade');
     });
 
     // 登录

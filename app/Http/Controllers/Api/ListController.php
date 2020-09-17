@@ -13,10 +13,12 @@ class ListController extends Controller
     //获取有哪些月份
     public function date()
     {
-        $data= Ranking::get();
-        $y=$data->groupBy('y');
-        $m=$data->groupBy('m');
-        $w=$data->groupBy('w');
+
+
+        $y=Ranking::groupBy('y')->pluck('y');
+
+        $m=Ranking::groupBy('m')->pluck('m');
+        $w=Ranking::groupBy('w')->pluck('w');
 
         return $this->success(['Y'=>$y,'m'=>$m,'w'=>$w]);
     }
@@ -40,7 +42,7 @@ class ListController extends Controller
 
     public function rank(Request $request)
     {
-        $data=$request->all();
+//        $data=$request->all();
         $num=request('num', -1);
         $where=[];
         $y = date('Y', time());
@@ -69,6 +71,9 @@ class ListController extends Controller
 //      dump(Redis::zrevrange("zset1",0,-1));
 //      dump(Redis::scan("zset1",0,-1));
         $data = Redis::zrevrange('zset1',0,$num,'withscores');//返回有序集合的所有值
+//            dd($data);
+//        $data=json_encode($data);
+//
 //        var_dump($data);
 //        return $data;
 //     return json_encode($data);
@@ -101,7 +106,7 @@ class ListController extends Controller
             $rank->save();
             return $this->success($rank);
         }else{
-            return $this->failed('错误');
+            return $this->success('错误');
         }
 
 

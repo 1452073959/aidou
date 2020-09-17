@@ -96,8 +96,8 @@ return [
         'default' => [
 //            'app_id'  => env('WECHAT_MINI_PROGRAM_APPID', 'wx0f8e31fa7cdd52bd'),
 //            'secret'  => env('WECHAT_MINI_PROGRAM_SECRET', 'ec93a842227c232aeb17b54ede8ca1bd'),
-            'app_id'  => env('WECHAT_MINI_PROGRAM_APPID', 'wx002d9cfde7973324'),
-            'secret'  => env('WECHAT_MINI_PROGRAM_SECRET', 'c90621d6dbc02ce91aa09b8739aa525c'),
+            'app_id'  => env('WECHAT_MINI_PROGRAM_APPID', 'wxbdc0faf61cb8b8bd'),
+            'secret'  => env('WECHAT_MINI_PROGRAM_SECRET', 'e72265c5ffb4bb084d9d0c40a7e5ec83'),
             'token'   => env('WECHAT_MINI_PROGRAM_TOKEN', ''),
             'aes_key' => env('WECHAT_MINI_PROGRAM_AES_KEY', ''),
         ],

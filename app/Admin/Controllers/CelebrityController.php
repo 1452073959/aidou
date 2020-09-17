@@ -22,7 +22,7 @@ class CelebrityController extends AdminController
             $grid->column('name');
             $grid->column('avatar')->image();
             $grid->column('backimage')->image();
-            $grid->column('influencenum');
+//            $grid->column('influencenum');
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
         
@@ -65,7 +65,7 @@ class CelebrityController extends AdminController
             $form->text('name');
             $form->image('avatar')->disableRemove()->uniqueName();;
             $form->image('backimage')->disableRemove()->uniqueName();;
-            $form->number('influencenum');
+//            $form->number('influencenum');
         
             $form->display('created_at');
             $form->display('updated_at');

@@ -83,12 +83,10 @@ class ListController extends Controller
         $a=[];
         foreach ($data as $k=>$v)
         {
-            $a[]=json_decode($k,true);
-            foreach ($a as $k1=>$v1)
-            {
-                $a[$k1]['num']=$v;
-            }
+            $a[$k]['star']=json_decode($k,true);
+            $a[$k]['num']=$v;
         }
+        sort($a);
         return $this->success($a);
     }
 

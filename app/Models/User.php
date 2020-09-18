@@ -63,7 +63,39 @@ class User extends Authenticatable implements JWTSubject
             $model->tree()->create(['speed_id'=>1,'last_time'=>time(),'collect'=>0]);
 //            dd($model);
         });
+
+        // 监听模型创建事件，在写入数据库之前触发
+        static::created(function ($model) {
+            $task=Task::all();
+            foreach ($task as $k=>$v)
+            {
+                if ($model->task()->find($v->id)) {
+                    return [];
+                }
+                $model->task()->attach($v);
+            }
+        });
+        static::updated(function($model) {
+            $task=Task::all();
+            foreach ($task as $k=>$v)
+            {
+                if ($model->task()->find($v->id)) {
+                    return [];
+                }
+                $model->task()->attach($v);
+            }
+        });
     }
+
+//  任务
+
+    public function task()
+    {
+        return $this->belongsToMany(Task::class, 'users_task')->withPivot('status')
+            ->withTimestamps();
+    }
+
+
 
 
 

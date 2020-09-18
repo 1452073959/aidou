@@ -86,7 +86,7 @@ class ListController extends Controller
             $a[$k]['star']=json_decode($k,true);
             $a[$k]['num']=$v;
         }
-        sort($a);
+        $a=  array_values($a);
         return $this->success($a);
     }
 

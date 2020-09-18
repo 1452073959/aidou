@@ -52,6 +52,7 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection speed_id
      * @property Grid\Column|Collection last_time
      * @property Grid\Column|Collection collect
+     * @property Grid\Column|Collection total
      * @property Grid\Column|Collection frameid
      * @property Grid\Column|Collection userid
      * @property Grid\Column|Collection amcode
@@ -81,6 +82,7 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection grade
      * @property Grid\Column|Collection num
      * @property Grid\Column|Collection upgrade
+     * @property Grid\Column|Collection award
      * @property Grid\Column|Collection nickname
      * @property Grid\Column|Collection weapp_avatar
      * @property Grid\Column|Collection weapp_openid
@@ -88,6 +90,8 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection diamondnum
      * @property Grid\Column|Collection votenum
      * @property Grid\Column|Collection box
+     * @property Grid\Column|Collection task_id
+     * @property Grid\Column|Collection status
      *
      * @method Grid\Column|Collection name(string $label = null)
      * @method Grid\Column|Collection version(string $label = null)
@@ -130,6 +134,7 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection speed_id(string $label = null)
      * @method Grid\Column|Collection last_time(string $label = null)
      * @method Grid\Column|Collection collect(string $label = null)
+     * @method Grid\Column|Collection total(string $label = null)
      * @method Grid\Column|Collection frameid(string $label = null)
      * @method Grid\Column|Collection userid(string $label = null)
      * @method Grid\Column|Collection amcode(string $label = null)
@@ -159,6 +164,7 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection grade(string $label = null)
      * @method Grid\Column|Collection num(string $label = null)
      * @method Grid\Column|Collection upgrade(string $label = null)
+     * @method Grid\Column|Collection award(string $label = null)
      * @method Grid\Column|Collection nickname(string $label = null)
      * @method Grid\Column|Collection weapp_avatar(string $label = null)
      * @method Grid\Column|Collection weapp_openid(string $label = null)
@@ -166,6 +172,8 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection diamondnum(string $label = null)
      * @method Grid\Column|Collection votenum(string $label = null)
      * @method Grid\Column|Collection box(string $label = null)
+     * @method Grid\Column|Collection task_id(string $label = null)
+     * @method Grid\Column|Collection status(string $label = null)
      */
     class Grid {}
 
@@ -213,6 +221,7 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection speed_id
      * @property Show\Field|Collection last_time
      * @property Show\Field|Collection collect
+     * @property Show\Field|Collection total
      * @property Show\Field|Collection frameid
      * @property Show\Field|Collection userid
      * @property Show\Field|Collection amcode
@@ -242,6 +251,7 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection grade
      * @property Show\Field|Collection num
      * @property Show\Field|Collection upgrade
+     * @property Show\Field|Collection award
      * @property Show\Field|Collection nickname
      * @property Show\Field|Collection weapp_avatar
      * @property Show\Field|Collection weapp_openid
@@ -249,6 +259,8 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection diamondnum
      * @property Show\Field|Collection votenum
      * @property Show\Field|Collection box
+     * @property Show\Field|Collection task_id
+     * @property Show\Field|Collection status
      *
      * @method Show\Field|Collection name(string $label = null)
      * @method Show\Field|Collection version(string $label = null)
@@ -291,6 +303,7 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection speed_id(string $label = null)
      * @method Show\Field|Collection last_time(string $label = null)
      * @method Show\Field|Collection collect(string $label = null)
+     * @method Show\Field|Collection total(string $label = null)
      * @method Show\Field|Collection frameid(string $label = null)
      * @method Show\Field|Collection userid(string $label = null)
      * @method Show\Field|Collection amcode(string $label = null)
@@ -320,6 +333,7 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection grade(string $label = null)
      * @method Show\Field|Collection num(string $label = null)
      * @method Show\Field|Collection upgrade(string $label = null)
+     * @method Show\Field|Collection award(string $label = null)
      * @method Show\Field|Collection nickname(string $label = null)
      * @method Show\Field|Collection weapp_avatar(string $label = null)
      * @method Show\Field|Collection weapp_openid(string $label = null)
@@ -327,6 +341,8 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection diamondnum(string $label = null)
      * @method Show\Field|Collection votenum(string $label = null)
      * @method Show\Field|Collection box(string $label = null)
+     * @method Show\Field|Collection task_id(string $label = null)
+     * @method Show\Field|Collection status(string $label = null)
      */
     class Show {}
 

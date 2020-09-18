@@ -22,4 +22,7 @@ Route::group([
     $router->resource('banner', 'BannerController');
     //钻石树
     $router->resource('speed', 'SpeedController');
+
+//    任务
+    $router->resource('task', 'TaskController');
 });

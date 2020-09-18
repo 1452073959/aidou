@@ -15,10 +15,9 @@ class ListController extends Controller
     {
 
 
-        $y=Ranking::groupBy('y')->pluck('y');
-
-        $m=Ranking::groupBy('m')->pluck('m');
-        $w=Ranking::groupBy('w')->pluck('w');
+        $y=Ranking::groupBy('y')->orderby('y','desc')->pluck('y');
+        $m=Ranking::groupBy('m')->orderby('m','desc')->pluck('m');
+        $w=Ranking::groupBy('w')->orderby('w','desc')->pluck('w');
 
         return $this->success(['Y'=>$y,'m'=>$m,'w'=>$w]);
     }

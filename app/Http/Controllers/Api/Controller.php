@@ -242,7 +242,6 @@ class Controller extends BaseController
             $start = strtotime('+1 monday', $year_start); //把第一个周一作为开始
 
         }
-        $a = [];
         // 第几周的开始时间
 
         if ($week === 1) {
@@ -258,11 +257,9 @@ class Controller extends BaseController
         $weekday['end'] = strtotime('+1 sunday', $weekday['start']);
 
         if (date('Y', $weekday['end']) != $year) {
-
             //  $weekday['end'] = $year_end;
             $weekday['end'] = date('Y-m-s h:i:s', $year_end);
         }
-        $a['end'] = date('Y-m-s', $weekday['end']);
 
         return $weekday;
     }

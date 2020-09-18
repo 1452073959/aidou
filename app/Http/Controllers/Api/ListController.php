@@ -33,7 +33,7 @@ class ListController extends Controller
         $y = date('Y', time());
         $w = date('W', time());
         $y=request('y', $y);
-        $w=request('w', $w-1);
+        $w=request('w', $w);
 
       return $this->success( $this->weekday($y,$w));
     }
@@ -46,7 +46,7 @@ class ListController extends Controller
         $where=[];
         $y = date('Y', time());
         $m = date('m', time());
-        $w = date('W', time())-1;
+        $w = date('W', time());
         $y=request('y', $y);
         $m=request('m', $m);
         $w=request('w', $w);
@@ -92,7 +92,7 @@ class ListController extends Controller
         $y = date('Y', time());
         $m = date('m', time());
         $d = date('d', time());
-        $w = date('W', time())-1;
+        $w = date('W', time());
         if($request->has('celebrity_id')&&$request->has('mingci')){
             $rank=new Ranking();
             $rank->celebrity_id=$request->input('celebrity_id');
@@ -127,7 +127,7 @@ class ListController extends Controller
         $where=[];
         $y = date('Y', time());
         $m = date('m', time());
-        $w = date('W', time())-1;
+        $w = date('W', time());
         $y=request('y', $y);
         $m=request('m', $m);
         $w=request('w', $w);
@@ -160,7 +160,7 @@ class ListController extends Controller
         $where=[];
         $y = date('Y', time());
         $m = date('m', time());
-        $w = date('W', time())-1;
+        $w = date('W', time());
         $y=request('y', $y);
         $m=request('m', $m);
         $w=request('w', $w);

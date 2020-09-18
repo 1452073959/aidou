@@ -138,18 +138,14 @@ class ListController extends Controller
         $w = date('W', time());
         $y=request('y', $y);
         $m=request('m', $m);
-        $w=request('w', $w);
-
-        $where = ['y'=>$y,'m'=>$m,'w'=>(string)$w];
-
-
+//        $w=request('w', $w);
+        $where = ['y'=>$y,'m'=>$m,];
         if($request->has('celebrity_id')){
             $rank = Ranking::with('user')->where($where)->where('celebrity_id',$request->input('celebrity_id'))->get();
         }else{
             $rank = Ranking::with('user')->where($where)->get();
 
         }
-
         $fanlist = $rank->groupBy('user_id');
 
         foreach ($fanlist as $k => $v) {
@@ -186,6 +182,18 @@ class ListController extends Controller
         }
         $data = Redis::zrevrange('zset1',0,1,'withscores');//返回有序集合的所有值
         return $this->success($data);
+    }
+
+
+    public function lastfans(Request $request)
+    {
+//        echo 123;
+        if($request->has('celebrity_id')){
+            $rank = Ranking::with('user')->where('celebrity_id',$request->input('celebrity_id'))->orderBy('id','desc')->take(5)->get();
+        }else{
+            return $this->success('明星id未传');
+        }
+        return $this->success($rank);
     }
 
 

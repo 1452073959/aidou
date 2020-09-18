@@ -59,7 +59,6 @@ class User extends Authenticatable implements JWTSubject
         parent::boot();
         // 监听模型创建事件，在写入数据库之前触发
         static::created (function ($model) {
-
             $model->tree()->create(['speed_id'=>1,'last_time'=>time(),'collect'=>0]);
 //            dd($model);
         });

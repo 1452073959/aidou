@@ -25,6 +25,13 @@ $api->version('v1', [
         $api->get('take', 'Api\TreeController@take');
         //s升级
         $api->get('upgrade', 'Api\TreeController@upgrade');
+
+        //任务列表
+        Route::get('task', 'Api\TaskController@list');
+        //领取积分
+        Route::post('gain', 'Api\TaskController@gain');
+//        完成任务
+        Route::post('perform', 'Api\TaskController@perform');
     });
 
     // 登录
@@ -44,6 +51,9 @@ $api->version('v1', [
     $api->any('box', 'ElseController@box');
     //获取明星排名
     $api->any('celeberrank', 'ListController@celeberrank');
+    //最后给明细投票的五个人
+    $api->any('lastfans', 'ListController@lastfans');
+
     //用户信息
     Route::get('user','Api\UserController@usershow');
     //banner

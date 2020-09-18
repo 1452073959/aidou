@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+
 use Symfony\Component\HttpFoundation\Response as FoundationResponse;
 use Illuminate\Http\Request;
 use Dingo\Api\Routing\Helpers;
@@ -12,18 +13,20 @@ use Auth;
 use JWTAuth;
 use EasyWeChat\Factory;
 use function EasyWeChat\Kernel\Support\generate_sign;
+
 class Controller extends BaseController
 {
     use Helpers;
-    public $user=[];
+    public $user = [];
     protected $guard = 'api';
+
     public function __construct(Request $request)
     {
 //      $this->middleware('refresh')->except('wechat');;
 //        $this->middleware('auth:api', ['except' => ['wechat']]);
 //        $this->middleware('jwt.auth', ['except' => ['wechat','tokenupdate','productlist','productshow','cate']]);
 
-        $this->user =  auth('api')->user();
+        $this->user = auth('api')->user();
     }
 
     public function respondWithToken($token)
@@ -38,28 +41,29 @@ class Controller extends BaseController
 
     /**
      * @var int
-
-    1. 返回正确信息
-
-    return $this->success('用户登录成功...');
-    2. 返回正确资源信息
-
-    return $this->success($user);
-    3. 返回自定义 http 状态码的正确信息
-
-    return $this->setStatusCode(201)->success('用户登录成功...');
-    4. 返回错误信息
-
-    return $this->failed('用户注册失败');
-    5. 返回自定义 http 状态码的错误信息
-
-    return $this->failed('用户登录失败',401);
-    6. 返回自定义 http 状态码的错误信息，同时也想返回自己内部定义的错误码
-
-    return $this->failed('用户登录失败',401,10001);
-    默认 success 返回的状态码是 200，failed 返回的状态码是 400
+     *
+     * 1. 返回正确信息
+     *
+     * return $this->success('用户登录成功...');
+     * 2. 返回正确资源信息
+     *
+     * return $this->success($user);
+     * 3. 返回自定义 http 状态码的正确信息
+     *
+     * return $this->setStatusCode(201)->success('用户登录成功...');
+     * 4. 返回错误信息
+     *
+     * return $this->failed('用户注册失败');
+     * 5. 返回自定义 http 状态码的错误信息
+     *
+     * return $this->failed('用户登录失败',401);
+     * 6. 返回自定义 http 状态码的错误信息，同时也想返回自己内部定义的错误码
+     *
+     * return $this->failed('用户登录失败',401,10001);
+     * 默认 success 返回的状态码是 200，failed 返回的状态码是 400
      */
     protected $statusCode = FoundationResponse::HTTP_OK;
+
     /**
      * @return mixed
      */
@@ -72,7 +76,7 @@ class Controller extends BaseController
      * @param $statusCode
      * @return $this
      */
-    public function setStatusCode($statusCode,$httpCode=null)
+    public function setStatusCode($statusCode, $httpCode = null)
     {
         $httpCode = $httpCode ?? $statusCode;
         $this->statusCode = $statusCode;
@@ -87,7 +91,7 @@ class Controller extends BaseController
     public function respond($data, $header = [])
     {
 
-        return Response::json($data,$this->getStatusCode(),$header);
+        return Response::json($data, $this->getStatusCode(), $header);
     }
 
     /**
@@ -96,9 +100,10 @@ class Controller extends BaseController
      * @param null $code
      * @return mixed
      */
-    public function status($status, array $data, $code = null){
+    public function status($status, array $data, $code = null)
+    {
 
-        if ($code){
+        if ($code) {
             $this->setStatusCode($code);
         }
         $status = [
@@ -106,7 +111,7 @@ class Controller extends BaseController
             'code' => $this->statusCode
         ];
 
-        $data = array_merge($status,$data);
+        $data = array_merge($status, $data);
         return $this->respond($data);
 
     }
@@ -124,9 +129,10 @@ class Controller extends BaseController
      *  message:xxx
      *  status:'error'
      */
-    public function failed($message, $code = FoundationResponse::HTTP_BAD_REQUEST,$status = 'error'){
+    public function failed($message, $code = FoundationResponse::HTTP_BAD_REQUEST, $status = 'error')
+    {
 
-        return $this->setStatusCode($code)->message($message,$status);
+        return $this->setStatusCode($code)->message($message, $status);
     }
 
     /**
@@ -134,9 +140,10 @@ class Controller extends BaseController
      * @param string $status
      * @return mixed
      */
-    public function message($message, $status = "success"){
+    public function message($message, $status = "success")
+    {
 
-        return $this->status($status,[
+        return $this->status($status, [
             'message' => $message
         ]);
     }
@@ -145,9 +152,10 @@ class Controller extends BaseController
      * @param string $message
      * @return mixed
      */
-    public function internalError($message = "Internal Error!"){
+    public function internalError($message = "Internal Error!")
+    {
 
-        return $this->failed($message,FoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
+        return $this->failed($message, FoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     /**
@@ -166,9 +174,10 @@ class Controller extends BaseController
      * @param string $status
      * @return mixed
      */
-    public function success($data, $status = "success"){
+    public function success($data, $status = "success")
+    {
 
-        return $this->status($status,compact('data'));
+        return $this->status($status, compact('data'));
     }
 
     /**
@@ -177,21 +186,23 @@ class Controller extends BaseController
      */
     public function notFond($message = 'Not Fond!')
     {
-        return $this->failed($message,Foundationresponse::HTTP_NOT_FOUND);
+        return $this->failed($message, Foundationresponse::HTTP_NOT_FOUND);
     }
+
     // 其他通用的Api帮助函数
 
-    public function HttpPost($content = null,$url='') {
+    public function HttpPost($content = null, $url = '')
+    {
         $postUrl = $url;
         $curlPost = $content;
-        $ch = curl_init (); // 初始化curl
-        curl_setopt ( $ch, CURLOPT_URL, $postUrl ); // 抓取指定网页
-        curl_setopt ( $ch, CURLOPT_HEADER, 0 ); // 设置header
-        curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 ); // 要求结果为字符串且输出到屏幕上
-        curl_setopt ( $ch, CURLOPT_POST, 1 ); // post提交方式
-        curl_setopt ( $ch, CURLOPT_POSTFIELDS, $curlPost );
-        $data = curl_exec ( $ch ); // 运行curl
-        curl_close ( $ch );
+        $ch = curl_init(); // 初始化curl
+        curl_setopt($ch, CURLOPT_URL, $postUrl); // 抓取指定网页
+        curl_setopt($ch, CURLOPT_HEADER, 0); // 设置header
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); // 要求结果为字符串且输出到屏幕上
+        curl_setopt($ch, CURLOPT_POST, 1); // post提交方式
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $curlPost);
+        $data = curl_exec($ch); // 运行curl
+        curl_close($ch);
         return $data;
     }
 
@@ -212,12 +223,12 @@ class Controller extends BaseController
     }
 
 
-    public function getAccessToken($appid,$appsecret)
+    public function getAccessToken($appid, $appsecret)
     {
 //        $url="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
         $url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' . $appid . '&secret=' . $appsecret;
-        $verify= json_decode($this->httpget($url),true);
-        $verify= $verify['access_token'];
+        $verify = json_decode($this->httpget($url), true);
+        $verify = $verify['access_token'];
         return $verify;
     }
 

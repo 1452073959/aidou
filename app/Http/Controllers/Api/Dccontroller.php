@@ -43,23 +43,23 @@ class Dccontroller extends Controller
 
         //        $token= auth('api')->login($user);
         $token = auth('api')->tokenById($user['id']);
-        return  $this->success($this->respondWithToken($token));
+        return $this->success($this->respondWithToken($token));
 //        return $this->respondWithToken($token);
     }
 
     public function rank(Request $request)
     {
-        $data=$request->all();
-        $num=request('num', -1);
-        $where=[];
+        $data = $request->all();
+        $num = request('num', -1);
+        $where = [];
         $y = date('Y', time());
         $m = date('m', time());
         $w = date('W', time());
-        $y=request('y', $y);
-        $m=request('m', $m);
-        $w=request('w', $w);
+        $y = request('y', $y);
+        $m = request('m', $m);
+        $w = request('w', $w);
 
-        $where = ['y'=>$y,'m'=>$m,'w'=>$w];
+        $where = ['y' => $y, 'm' => $m, 'w' => $w];
 
         $rank = Ranking::with('celebrity')->where($where)->get();
 //                dd($rank);
@@ -76,7 +76,7 @@ class Dccontroller extends Controller
 //        //倒序
 //      dump(Redis::zrevrange("zset1",0,-1));
 //      dump(Redis::scan("zset1",0,-1));
-        $data = Redis::zrevrange('zset1',0,$num,'withscores');//返回有序集合的所有值
+        $data = Redis::zrevrange('zset1', 0, $num, 'withscores');//返回有序集合的所有值
 //        var_dump($data);
 //        return $data;
 //     return json_encode($data);
@@ -86,11 +86,7 @@ class Dccontroller extends Controller
         return $this->success($data);
     }
 
-    public function topiao()
-    {
 
-
-    }
 
 
     public static function getWeeks($date = '')

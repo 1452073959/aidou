@@ -46,7 +46,7 @@ class WechatController extends Controller
 //        $token= auth('api')->login($user);
         $token =auth('api')->tokenById($user['id']);
 //        return $this->respondWithToken($token);
-        return  $this->success($this->respondWithToken($token));
+        return $this->success($this->respondWithToken($token));
 //        return $this->success( $this->respondWithToken($token));
     }
 

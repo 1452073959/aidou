@@ -70,7 +70,7 @@ class ListController extends Controller
 //      dump(Redis::zrevrange("zset1",0,-1));
 //      dump(Redis::scan("zset1",0,-1));
         $data = Redis::zrevrange('zset1',0,$num,'withscores');//返回有序集合的所有值
-//            dd($data);
+            dd($data);
 //        $data=json_encode($data);
 //
 //        var_dump($data);
@@ -79,7 +79,7 @@ class ListController extends Controller
 //    echo  Redis::zadd('zset1',1,'ab11');
 //    echo  Redis::zadd('zset1',2,'cd');
 //    echo  Redis::zadd('zset1',3,'ef');
-        return $this->success($data);
+        return $data;
     }
 
     //打榜

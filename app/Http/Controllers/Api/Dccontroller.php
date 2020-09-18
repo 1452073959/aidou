@@ -43,7 +43,8 @@ class Dccontroller extends Controller
 
         //        $token= auth('api')->login($user);
         $token = auth('api')->tokenById($user['id']);
-        return $this->respondWithToken($token);
+        return  $this->success($this->respondWithToken($token));
+//        return $this->respondWithToken($token);
     }
 
     public function rank(Request $request)

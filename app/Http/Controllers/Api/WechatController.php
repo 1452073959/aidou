@@ -8,10 +8,7 @@ use function EasyWeChat\Kernel\Support\generate_sign;
 use Cache;
 use App\Models\User;
 use Storage;
-use App\Models\Swipe;
-use Overtrue\EasySms\EasySms;
 use Illuminate\Support\Str;
-use App\Http\Requests\Api\VerificationCodeRequest;
 class WechatController extends Controller
 {
     //登陆
@@ -19,10 +16,9 @@ class WechatController extends Controller
     public function wechat(Request $request)
     {
         $data = $request->all();
-
+        dd(123);
         $app = \EasyWeChat::miniProgram();
         $wq = $app->auth->session($data['code']); // $code 为wx.login里的code
-//        dd($wq);
         if (isset($wq['errcode'])) {
             return $this->failed('code已过期或不正确');
         }
@@ -46,11 +42,12 @@ class WechatController extends Controller
             $user->weapp_avatar=$data['userInfo']['avatarUrl'];
             $user->save();
         }
-
+        return $this->success(123);
 //        $token= auth('api')->login($user);
         $token =auth('api')->tokenById($user['id']);
 //        return $this->respondWithToken($token);
-        return $this->success( $this->respondWithToken($token));
+        return  $this->success($this->respondWithToken($token));
+//        return $this->success( $this->respondWithToken($token));
     }
 
     //刷新token

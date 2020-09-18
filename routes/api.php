@@ -30,7 +30,7 @@ $api->version('v1', [
     // 登录
     $api->any('logincode', 'Dccontroller@wechat');
     //刷新token
-    $api->get('token', 'WechatController@tokenupdate');
+    $api->get('token', 'Dccontroller@tokenupdate');
     //排行榜
     $api->any('rank', 'ListController@rank');
     //时间

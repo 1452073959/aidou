@@ -13,12 +13,12 @@ class ListController extends Controller
     //获取有哪些月份
     public function date()
     {
-
+//        dd(123) ;
 
         $y=Ranking::groupBy('y')->orderby('y','desc')->pluck('y');
         $m=Ranking::groupBy('m')->orderby('m','desc')->pluck('m');
         $w=Ranking::groupBy('w')->orderby('w','desc')->pluck('w');
-
+//dd(0.);
         return $this->success(['Y'=>$y,'m'=>$m,'w'=>$w]);
     }
 

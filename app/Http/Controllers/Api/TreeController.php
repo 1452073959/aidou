@@ -79,8 +79,10 @@ class TreeController extends Controller
         }
         //下一级
         $next=Speed::where('grade',$user->tree->speed_id+1)->first();
-//        dd( $next->toarray()) ;
         $gradenum=$user->tree()->with('speed')->first();
+        if($user['diamondnum']<$gradenum['speed']['upgrade']){
+            return $this->success('升级失败!钻石余额不足');
+        }
         $user->tree()->update(['speed_id'=>$next['grade']]);
         $user->diamondnum=$user['diamondnum']-$gradenum['speed']['upgrade'];
         $user->save();

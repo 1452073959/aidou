@@ -151,8 +151,6 @@ class ListController extends Controller
         foreach ($rank as $k => $v) {
             $rank[$k]['num']=array_sum( DB::table('ranking')->where($where)->where('user_id',$v['user_id'])->pluck('mingci')->toArray());
         }
-
-
         return $this->success($rank);
     }
 

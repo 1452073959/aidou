@@ -58,7 +58,7 @@ class TreeController extends Controller
             $user->diamondnum=$user['diamondnum']+$gradenum['collect'];
             $user->save();
         });
-
+        $gradenum=$user->tree()->with('speed')->first();
         return $this->success([
             'num'=>0,
             'gradenum'=>$gradenum['speed']['num'],

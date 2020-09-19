@@ -87,7 +87,7 @@ class ListController extends Controller
             $a[$k]['num'] = $v;
         }
         $a = array_values($a);
-        dd($a);
+//        dd($a);
         return $this->success($a);
     }
 

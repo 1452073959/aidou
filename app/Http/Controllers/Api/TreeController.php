@@ -46,7 +46,8 @@ class TreeController extends Controller
     public function take()
     {
         $user = auth('api')->user();
-        $gradenum=$user->tree::with('speed')->first();
+//        dd($user->toarray());
+        $gradenum=$user->tree()->with('speed')->first();
 //        dd($gradenum->toarray());
         DB::transaction(function ()  use ($user,$gradenum) {
             $user->tree()->update(['collect'=>0,'total'=>$gradenum['total']+$gradenum['collect'],'last_time'=>time()]);

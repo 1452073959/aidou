@@ -65,6 +65,7 @@ class TreeController extends Controller
             'diamondnum'=>$user['diamondnum'],
             'total'=>$gradenum['total'],
             'speed'=>$user['tree']['speed_id'],
+            'over'=>true,
         ]);
     }
     //升级
@@ -79,7 +80,7 @@ class TreeController extends Controller
         //下一级
         $next=Speed::where('grade',$user->tree->speed_id+1)->first();
 //        dd( $next->toarray()) ;
-        $gradenum=$user->tree::with('speed')->first();
+        $gradenum=$user->tree()->with('speed')->first();
         $user->tree()->update(['speed_id'=>$next['grade']]);
         $user->diamondnum=$user['diamondnum']-$gradenum['speed']['upgrade'];
         $user->save();

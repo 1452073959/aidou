@@ -30,6 +30,9 @@ class TreeController extends Controller
        $max= (28800*$gradenum['speed']['num'])/10;
         if($num>$max){
             $num=$max;
+            $over=false;
+        }else{
+            $over=true;
         }
         $user->tree()->update(['collect'=>$num]);
         //可收取钻石//钻石速度//升级所需//用户钻石余额//总收取//用户等级
@@ -40,6 +43,7 @@ class TreeController extends Controller
             'diamondnum'=>$user['diamondnum'],
             'total'=>$gradenum['total'],
             'speed'=>$user['tree']['speed_id'],
+            'over'=>$over,
         ]);
     }
     //收取钻石

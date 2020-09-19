@@ -18,7 +18,7 @@ class TreeController extends Controller
         //上次`收取时间
         $last_time=$user->tree->last_time;
         //算出等级速度
-        $gradenum=$user->tree::with('speed')->first();
+        $gradenum=$user->tree()->with('speed')->first();
 //        dd($gradenum->toarray());
         //计算出可收取钻石
 //        dump($time);
@@ -58,6 +58,7 @@ class TreeController extends Controller
             $user->diamondnum=$user['diamondnum']+$gradenum['collect'];
             $user->save();
         });
+
         return $this->success([
             'num'=>0,
             'gradenum'=>$gradenum['speed']['num'],

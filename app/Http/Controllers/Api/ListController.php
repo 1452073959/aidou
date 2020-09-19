@@ -87,6 +87,7 @@ class ListController extends Controller
             $a[$k]['num'] = $v;
         }
         $a = array_values($a);
+        dd($a);
         return $this->success($a);
     }
 
@@ -142,22 +143,17 @@ class ListController extends Controller
 //        $w=request('w', $w);
         $where = ['y' => $y, 'm' => $m,];
         if ($request->has('celebrity_id')) {
-            $rank = Ranking::with('user')->where($where)->where('celebrity_id', $request->input('celebrity_id'))->get();
+            $rank = Ranking::with('user')->where($where)->where('celebrity_id', $request->input('celebrity_id'))->groupBy('user_id')->get();
         } else {
-            $rank = Ranking::with('user')->where($where)->get();
-
+            $rank = Ranking::with('user')->where($where)->groupBy('user_id')->get();
         }
-        $fanlist = $rank->groupBy('user_id');
 
-        foreach ($fanlist as $k => $v) {
-//            dump($k);
-            $sum = 0;
-            foreach ($v as $k1 => $v2) {
-                $sum += (int)$v2['mingci'];
-                $fanlist[$k]['sum'] = $sum;
-            }
+        foreach ($rank as $k => $v) {
+            $rank[$k]['num']=array_sum( DB::table('ranking')->where($where)->where('user_id',$v['user_id'])->pluck('mingci')->toArray());
         }
-        return $this->success($fanlist);
+
+
+        return $this->success($rank);
     }
 
     //本人投过的

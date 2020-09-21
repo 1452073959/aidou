@@ -27,17 +27,28 @@ class ElseController extends Controller
             $flight->save();
         };
         $user = auth('api')->user();
-        $boxnum = User::find($user['id']);
-        if (!$request->has('pid')) {
-            $boxnum->box = $boxnum['box'] - 1;
-        };
-        $boxnum->save();
-        if ($boxnum['box'] <= 0) {
+        if ($user['box'] <= 0) {
             return $this->success('不能再开了');
         }
+        if (!$request->has('pid')) {
+            $user->box = $user['box'] - 1;
+        };
+        $user->save();
+
 //        dd($boxnum->toarray());
 
-        return $this->success(['boxnum' => $boxnum['box'], 'rand' => $rand]);
+        return $this->success(['boxnum' => $user['box'], 'rand' => $rand]);
+    }
+
+    public function draw()
+    {
+        $user = auth('api')->user();
+        if ($user['drawamount'] <= 0) {
+            return $this->success('不能再抽了');
+        }
+        $user->drawamount=$user['drawamount']-1;
+        $user->save();
+        return $this->success(['drawamount' =>$user['drawamount']]);
     }
 
     public function banner()

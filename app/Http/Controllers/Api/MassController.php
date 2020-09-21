@@ -38,6 +38,10 @@ class MassController extends Controller
             if ($participation) {
                 return $this->success('该集结您已参与过');
             } else {
+
+
+                $participation=Qunmass::find( $request->input('qunmass_id'));
+//                dump($participation);
                 if($participation['end_time']<time()){
                     return $this->success('该集结已过期');
                 }

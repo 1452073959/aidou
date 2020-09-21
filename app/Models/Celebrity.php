@@ -9,5 +9,5 @@ class Celebrity extends Model
 {
 	
     protected $table = 'celebrity';
-    
+    protected $guarded = [];
 }

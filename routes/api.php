@@ -35,6 +35,15 @@ $api->version('v1', [
         Route::post('gain', 'Api\TaskController@gain');
 //        完成任务
         Route::post('perform', 'Api\TaskController@perform');
+
+
+        //群集结发起
+        Route::post('mass', 'Api\MassController@mass');
+
+        //群集结参与
+        Route::post('participation', 'Api\MassController@participation');
+        //群集结查询
+        Route::get('massquery', 'Api\MassController@massquery');
     });
 
     // 登录

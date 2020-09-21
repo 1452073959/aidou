@@ -58,10 +58,20 @@ class TaskController extends AdminController
     {
         return Form::make(new Task(), function (Form $form) {
             $form->display('id');
-            $form->text('title');
-            $form->text('award');
-            $form->text('num');
-            $form->text('type');
+            $form->text('title')->required();
+            $form->text('award')->required();
+            $form->text('num')->required();
+            $form->radio('type')->options([
+                '1' => '新手任务', '2'=> '日常',
+            ])->required();
+            $form->radio('what','行为')->options([
+
+                '1' => '看视频', '2'=> '打榜',3=>'群集结',
+                4=>'应援助力' ,5=>'开箱子',6=>'跳小程序 ',7=>'分享好友'
+
+
+            ])->required();
+            $form->number('linit','行为次数')->default(1)->required();
         });
     }
 }

@@ -6,8 +6,8 @@ return [
     'fields' => [
         'title' => '任务名称',
         'award' => '任务奖励描述',
-        'num' => '值',
-        'type' => '1新手2日常',
+        'num' => '监理钻石值',
+        'type' => '任务类型',
     ],
     'options' => [
     ],

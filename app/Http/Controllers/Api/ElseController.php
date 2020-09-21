@@ -28,7 +28,9 @@ class ElseController extends Controller
         };
         $user = auth('api')->user();
         $boxnum = User::find($user['id']);
-        $boxnum->box = $boxnum['box'] - 1;
+        if (!$request->has('pid')) {
+            $boxnum->box = $boxnum['box'] - 1;
+        };
         $boxnum->save();
         if ($boxnum['box'] <= 0) {
             return $this->success('不能再开了');

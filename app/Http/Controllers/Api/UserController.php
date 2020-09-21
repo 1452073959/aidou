@@ -18,7 +18,7 @@ class UserController extends Controller
     //修改用户信息
     public function updateuser(Request $request)
     {
-        $n=$request->all();
+
         $user = auth('api')->user();
         $flight = User::find($user['id']);
         $num=request('num',0);
@@ -38,5 +38,28 @@ class UserController extends Controller
         }
     }
 
-    //z
+    //用户钻石兑换票
+    public function conversion(Request $request)
+    {
+        $user = auth('api')->user();
+        $flight = User::find($user['id']);
+        $num=request('votenum',0);
+        if($request->has('votenum')) {
+
+            if($flight['diamondnum']<($num*10)){
+                return $this->success('钻石不足以兑换');
+            }else{
+                //            票增加
+                $flight->votenum = ($flight['votenum']+=0) + $num;
+                //钻石减少
+                $flight->diamondnum = $flight['diamondnum'] - ($num*10);
+                $flight->save();
+//                dd($flight);
+                return $this->success($flight);
+            }
+
+        }else{
+            return $this->success('需填写兑换票数');
+        }
+    }
 }

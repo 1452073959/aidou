@@ -15,6 +15,9 @@ $api->version('v1', [
 
         //用户增加票/钻石接口
         Route::post('useradd', 'Api\UserController@updateuser');
+
+        //钻石兑换票
+        Route::post('conversion', 'Api\UserController@conversion');
         //d打榜
         Route::post('rankadd', 'Api\ListController@rankadd');
         //本人投过票的

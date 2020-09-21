@@ -56,9 +56,11 @@ class LotteryController extends AdminController
     {
         return Form::make(new Lottery(), function (Form $form) {
             $form->display('id');
-            $form->text('title');
-            $form->text('type');
-            $form->text('sum');
+            $form->text('title')->required();
+            $form->radio('type')->options([
+                '1' => '钻石', '2'=> '票',
+            ])->required();
+            $form->text('sum')->required();
         });
     }
 }

@@ -44,9 +44,13 @@ class TaskController extends Controller
         $user = auth('api')->user();
 
         $data = $request->all();
-        if ($request->has('task_id')&&$request->has('status')) {
+        if ($request->has('task_id')) {
             $gain= $user->task()->find($data['task_id']);
-            $user->task()->updateExistingPivot($data['task_id'],['status'=>$data['status']]);
+            $user->task()->updateExistingPivot($data['task_id'],['sum'=>$gain['pivot']['sum']+1]);
+            if($gain['pivot']['sum']+1>=$gain['linit']) {
+
+                $user->task()->updateExistingPivot($data['task_id'], ['status' => 2]);
+            }
             if($user){
                 return $this->success('完成成功');
             }else{

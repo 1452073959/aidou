@@ -42,7 +42,13 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection password
      * @property Grid\Column|Collection avatar
      * @property Grid\Column|Collection remember_token
+     * @property Grid\Column|Collection star
+     * @property Grid\Column|Collection xid
+     * @property Grid\Column|Collection endtime
      * @property Grid\Column|Collection img
+     * @property Grid\Column|Collection stocksnum
+     * @property Grid\Column|Collection tel
+     * @property Grid\Column|Collection status
      * @property Grid\Column|Collection url
      * @property Grid\Column|Collection boxnum
      * @property Grid\Column|Collection max
@@ -73,16 +79,22 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection sum
      * @property Grid\Column|Collection email
      * @property Grid\Column|Collection token
+     * @property Grid\Column|Collection num
+     * @property Grid\Column|Collection qunmass_id
      * @property Grid\Column|Collection celebrity_id
+     * @property Grid\Column|Collection end_time
+     * @property Grid\Column|Collection del_time
      * @property Grid\Column|Collection y
      * @property Grid\Column|Collection m
      * @property Grid\Column|Collection d
      * @property Grid\Column|Collection w
      * @property Grid\Column|Collection mingci
      * @property Grid\Column|Collection grade
-     * @property Grid\Column|Collection num
      * @property Grid\Column|Collection upgrade
      * @property Grid\Column|Collection award
+     * @property Grid\Column|Collection what
+     * @property Grid\Column|Collection linit
+     * @property Grid\Column|Collection newlimit
      * @property Grid\Column|Collection nickname
      * @property Grid\Column|Collection weapp_avatar
      * @property Grid\Column|Collection weapp_openid
@@ -90,8 +102,8 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection diamondnum
      * @property Grid\Column|Collection votenum
      * @property Grid\Column|Collection box
+     * @property Grid\Column|Collection drawamount
      * @property Grid\Column|Collection task_id
-     * @property Grid\Column|Collection status
      *
      * @method Grid\Column|Collection name(string $label = null)
      * @method Grid\Column|Collection version(string $label = null)
@@ -124,7 +136,13 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection password(string $label = null)
      * @method Grid\Column|Collection avatar(string $label = null)
      * @method Grid\Column|Collection remember_token(string $label = null)
+     * @method Grid\Column|Collection star(string $label = null)
+     * @method Grid\Column|Collection xid(string $label = null)
+     * @method Grid\Column|Collection endtime(string $label = null)
      * @method Grid\Column|Collection img(string $label = null)
+     * @method Grid\Column|Collection stocksnum(string $label = null)
+     * @method Grid\Column|Collection tel(string $label = null)
+     * @method Grid\Column|Collection status(string $label = null)
      * @method Grid\Column|Collection url(string $label = null)
      * @method Grid\Column|Collection boxnum(string $label = null)
      * @method Grid\Column|Collection max(string $label = null)
@@ -155,16 +173,22 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection sum(string $label = null)
      * @method Grid\Column|Collection email(string $label = null)
      * @method Grid\Column|Collection token(string $label = null)
+     * @method Grid\Column|Collection num(string $label = null)
+     * @method Grid\Column|Collection qunmass_id(string $label = null)
      * @method Grid\Column|Collection celebrity_id(string $label = null)
+     * @method Grid\Column|Collection end_time(string $label = null)
+     * @method Grid\Column|Collection del_time(string $label = null)
      * @method Grid\Column|Collection y(string $label = null)
      * @method Grid\Column|Collection m(string $label = null)
      * @method Grid\Column|Collection d(string $label = null)
      * @method Grid\Column|Collection w(string $label = null)
      * @method Grid\Column|Collection mingci(string $label = null)
      * @method Grid\Column|Collection grade(string $label = null)
-     * @method Grid\Column|Collection num(string $label = null)
      * @method Grid\Column|Collection upgrade(string $label = null)
      * @method Grid\Column|Collection award(string $label = null)
+     * @method Grid\Column|Collection what(string $label = null)
+     * @method Grid\Column|Collection linit(string $label = null)
+     * @method Grid\Column|Collection newlimit(string $label = null)
      * @method Grid\Column|Collection nickname(string $label = null)
      * @method Grid\Column|Collection weapp_avatar(string $label = null)
      * @method Grid\Column|Collection weapp_openid(string $label = null)
@@ -172,8 +196,8 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection diamondnum(string $label = null)
      * @method Grid\Column|Collection votenum(string $label = null)
      * @method Grid\Column|Collection box(string $label = null)
+     * @method Grid\Column|Collection drawamount(string $label = null)
      * @method Grid\Column|Collection task_id(string $label = null)
-     * @method Grid\Column|Collection status(string $label = null)
      */
     class Grid {}
 
@@ -211,7 +235,13 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection password
      * @property Show\Field|Collection avatar
      * @property Show\Field|Collection remember_token
+     * @property Show\Field|Collection star
+     * @property Show\Field|Collection xid
+     * @property Show\Field|Collection endtime
      * @property Show\Field|Collection img
+     * @property Show\Field|Collection stocksnum
+     * @property Show\Field|Collection tel
+     * @property Show\Field|Collection status
      * @property Show\Field|Collection url
      * @property Show\Field|Collection boxnum
      * @property Show\Field|Collection max
@@ -242,16 +272,22 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection sum
      * @property Show\Field|Collection email
      * @property Show\Field|Collection token
+     * @property Show\Field|Collection num
+     * @property Show\Field|Collection qunmass_id
      * @property Show\Field|Collection celebrity_id
+     * @property Show\Field|Collection end_time
+     * @property Show\Field|Collection del_time
      * @property Show\Field|Collection y
      * @property Show\Field|Collection m
      * @property Show\Field|Collection d
      * @property Show\Field|Collection w
      * @property Show\Field|Collection mingci
      * @property Show\Field|Collection grade
-     * @property Show\Field|Collection num
      * @property Show\Field|Collection upgrade
      * @property Show\Field|Collection award
+     * @property Show\Field|Collection what
+     * @property Show\Field|Collection linit
+     * @property Show\Field|Collection newlimit
      * @property Show\Field|Collection nickname
      * @property Show\Field|Collection weapp_avatar
      * @property Show\Field|Collection weapp_openid
@@ -259,8 +295,8 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection diamondnum
      * @property Show\Field|Collection votenum
      * @property Show\Field|Collection box
+     * @property Show\Field|Collection drawamount
      * @property Show\Field|Collection task_id
-     * @property Show\Field|Collection status
      *
      * @method Show\Field|Collection name(string $label = null)
      * @method Show\Field|Collection version(string $label = null)
@@ -293,7 +329,13 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection password(string $label = null)
      * @method Show\Field|Collection avatar(string $label = null)
      * @method Show\Field|Collection remember_token(string $label = null)
+     * @method Show\Field|Collection star(string $label = null)
+     * @method Show\Field|Collection xid(string $label = null)
+     * @method Show\Field|Collection endtime(string $label = null)
      * @method Show\Field|Collection img(string $label = null)
+     * @method Show\Field|Collection stocksnum(string $label = null)
+     * @method Show\Field|Collection tel(string $label = null)
+     * @method Show\Field|Collection status(string $label = null)
      * @method Show\Field|Collection url(string $label = null)
      * @method Show\Field|Collection boxnum(string $label = null)
      * @method Show\Field|Collection max(string $label = null)
@@ -324,16 +366,22 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection sum(string $label = null)
      * @method Show\Field|Collection email(string $label = null)
      * @method Show\Field|Collection token(string $label = null)
+     * @method Show\Field|Collection num(string $label = null)
+     * @method Show\Field|Collection qunmass_id(string $label = null)
      * @method Show\Field|Collection celebrity_id(string $label = null)
+     * @method Show\Field|Collection end_time(string $label = null)
+     * @method Show\Field|Collection del_time(string $label = null)
      * @method Show\Field|Collection y(string $label = null)
      * @method Show\Field|Collection m(string $label = null)
      * @method Show\Field|Collection d(string $label = null)
      * @method Show\Field|Collection w(string $label = null)
      * @method Show\Field|Collection mingci(string $label = null)
      * @method Show\Field|Collection grade(string $label = null)
-     * @method Show\Field|Collection num(string $label = null)
      * @method Show\Field|Collection upgrade(string $label = null)
      * @method Show\Field|Collection award(string $label = null)
+     * @method Show\Field|Collection what(string $label = null)
+     * @method Show\Field|Collection linit(string $label = null)
+     * @method Show\Field|Collection newlimit(string $label = null)
      * @method Show\Field|Collection nickname(string $label = null)
      * @method Show\Field|Collection weapp_avatar(string $label = null)
      * @method Show\Field|Collection weapp_openid(string $label = null)
@@ -341,8 +389,8 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection diamondnum(string $label = null)
      * @method Show\Field|Collection votenum(string $label = null)
      * @method Show\Field|Collection box(string $label = null)
+     * @method Show\Field|Collection drawamount(string $label = null)
      * @method Show\Field|Collection task_id(string $label = null)
-     * @method Show\Field|Collection status(string $label = null)
      */
     class Show {}
 

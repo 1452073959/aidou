@@ -46,6 +46,17 @@ $api->version('v1', [
         $api->any('box', 'ElseController@box');
         //抽奖
         $api->any('draw','Api\ElseController@draw');
+        //项目选择
+        $api->get('project','Api\ElseController@project');
+        //项目发起
+        $api->post('assistance','Api\AssistanceController@assistance');
+        //项目列表1待审核2.审核完成
+        $api->get('assistancelist','Api\AssistanceController@assistancelist');
+//        项目详情参数传id
+        $api->get('assistancelist','Api\AssistanceController@assistancelist');
+        //参与应援参数传id
+        $api->post('assistanceparticipation','Api\AssistanceController@assistanceparticipation');
+
 
     });
 

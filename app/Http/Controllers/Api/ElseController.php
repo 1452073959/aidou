@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Api\Controller;
 use App\Models\Banner;
 use App\Models\Lottery;
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -56,4 +57,12 @@ class ElseController extends Controller
         $banner = Banner::all();
         return $this->success($banner);
     }
+    //项目
+    public function project()
+    {
+        $project=Project::get();
+        return $this->success($project);
+    }
+
+
 }

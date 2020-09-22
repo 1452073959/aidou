@@ -56,6 +56,9 @@ class BannerController extends AdminController
             $form->display('id');
             $form->image('img')->uniqueName();;
             $form->url('url');
+            $form->radio('status')->options([
+                1 => '图文', 2 => '跳转小程序',3=>'榜单明星',4=>'其他'
+            ])->required();
         });
     }
 }

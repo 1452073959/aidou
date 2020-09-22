@@ -93,10 +93,14 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany(Task::class, 'users_task')->withPivot('status')->withTimestamps();
 
     }
-
     public function participation()
     {
         return $this->hasMany(Qunman::class);
+    }
+
+    public function qunmass()
+    {
+        return $this->hasMany(Qunmass::class);
     }
 
 

@@ -45,7 +45,7 @@ $api->version('v1', [
         //开箱子
         $api->any('box', 'ElseController@box');
         //抽奖
-        $api->get('draw','ElseController@draw');
+        $api->any('draw','Api\ElseController@draw');
 
     });
 

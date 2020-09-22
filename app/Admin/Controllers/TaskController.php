@@ -23,10 +23,10 @@ class TaskController extends AdminController
             $grid->column('award');
             $grid->column('num');
             $grid->column('type');
-        
+
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
-        
+
             });
         });
     }
@@ -62,16 +62,16 @@ class TaskController extends AdminController
             $form->text('award')->required();
             $form->text('num')->required();
             $form->radio('type')->options([
-                '1' => '新手任务', '2'=> '日常',
+                '1' => '新手任务', '2' => '日常',
             ])->required();
-            $form->radio('what','行为')->options([
+            $form->radio('what', '行为')->options([
 
-                '1' => '看视频', '2'=> '打榜',3=>'群集结',
-                4=>'应援助力' ,5=>'开箱子',6=>'跳小程序 ',7=>'分享好友'
-
-
+                '1' => '看视频', '2' => '打榜', 3 => '群集结',
+                4 => '应援助力', 5 => '开箱子', 6 => '跳小程序 ', 7 => '分享好友',
+                8 => '完成所有', 9 => '加入后援会', 10 => '参与抽奖'
             ])->required();
-            $form->number('linit','行为次数')->default(1)->required();
+            $form->text('url','小程序')->help('仅对跳转小程序有用')->required();
+            $form->number('linit', '行为次数')->default(1)->required();
         });
     }
 }

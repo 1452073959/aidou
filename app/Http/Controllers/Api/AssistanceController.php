@@ -52,5 +52,13 @@ class AssistanceController extends Controller
             return $this->success('错误');
         }
     }
+
+
+    public function admincate(Request $request)
+    {
+        $data= Project::get();
+        return $data;
+    }
+
 }
 

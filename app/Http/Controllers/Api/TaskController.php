@@ -45,10 +45,24 @@ class TaskController extends Controller
 
         $data = $request->all();
         if ($request->has('task_id')) {
+            $gainall= $user->task()->get();
             $gain= $user->task()->find($data['task_id']);
+//            dd($gainall->toarray());
+
+            foreach ($gainall as $k=>$v)
+            {
+                if($v['id']==15){
+                    continue;
+                }
+                if($v['pivot']['status']==1){
+                    break;
+                }
+                if($v['pivot']['status']==2){
+                    $user->task()->updateExistingPivot(15, ['status' => 2]);
+                }
+            }
             $user->task()->updateExistingPivot($data['task_id'],['sum'=>$gain['pivot']['sum']+1]);
             if($gain['pivot']['sum']+1>=$gain['linit']) {
-
                 $user->task()->updateExistingPivot($data['task_id'], ['status' => 2]);
             }
             if($user){

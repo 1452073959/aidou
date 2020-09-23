@@ -25,6 +25,8 @@ Route::group([
     //应援
     $router->resource('project', 'ProjectController');
 
+    //应援审核
+    $router->resource('shenghe', 'AssistanceController');
 //    任务
     $router->resource('task', 'TaskController');
 });//

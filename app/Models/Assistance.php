@@ -10,4 +10,11 @@ class Assistance extends Model
 	
     protected $table = 'assistance';
     protected $guarded = [];
+
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

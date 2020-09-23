@@ -86,6 +86,8 @@ $api->version('v1', [
     //粉丝榜
     $api->any('fanlist', 'ListController@fanlist');
 
+    $api->get('cate', 'AssistanceController@admincate');
+
 
     Route::get('version', function() {
         return 'this is version v1';

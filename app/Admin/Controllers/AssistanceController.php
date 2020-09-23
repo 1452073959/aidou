@@ -19,15 +19,24 @@ class AssistanceController extends AdminController
     {
         return Grid::make(new Assistance(), function (Grid $grid) {
             $grid->column('id')->sortable();
-            $grid->column('user_id');
+//            $grid->column('user_id');
+
+            $grid->model()->with(['user']);
+            $grid->column('user.nickname', '用户');
             $grid->column('name');
             $grid->column('star');
             $grid->column('xid');
             $grid->column('endtime');
-            $grid->column('img');
+//            $grid->column('img');
             $grid->column('stocksnum');
             $grid->column('tel');
-            $grid->column('status');
+            $grid->status->using([ 1 => '不通过',2=>'通过'])->filter(
+                Grid\Column\Filter\In::make([
+                    1 => '不通过',
+                    2 => '通过',
+
+                ])
+            );;
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
         
@@ -70,18 +79,19 @@ class AssistanceController extends AdminController
      */
     protected function form()
     {
-        return Form::make(new Assistance(), function (Form $form) {
+        return Form::make(new Assistance(['user']), function (Form $form) {
             $form->display('id');
-            $form->text('user_id');
+//            $form->text('user_id');
             $form->text('name');
             $form->text('star');
-            $form->text('xid');
+//            $form->text('xid');
+            $form->select('xid','项目')->options(config('app.url').'/api/cate')->required();
             $form->text('endtime');
-            $form->text('img');
+            $form->image('img')->required();
             $form->text('stocksnum');
             $form->text('tel');
-            $form->text('status');
-        
+//            $form->text('status');
+            $form->radio('status')->options(['1' => '不通过', '2'=> '通过'])->help('不通过状态不显示')->required();
             $form->display('created_at');
             $form->display('updated_at');
         });

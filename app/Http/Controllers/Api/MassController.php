@@ -48,7 +48,7 @@ class MassController extends Controller
                 if($user['id']==$participation['user_id']){
                     return $this->success('发起人已经默认参与哟!');
                 }
-                dump($participation);
+//                dump($participation);
                 if($participation['end_time']<time()){
                     return $this->success('该集结已过期');
                 }

@@ -40,8 +40,7 @@ $api->version('v1', [
         Route::post('mass', 'Api\MassController@mass');
         //群集结参与
         Route::post('participation', 'Api\MassController@participation');
-        //群集结查询
-        Route::get('massquery', 'Api\MassController@massquery');
+
         //开箱子
         $api->any('box', 'ElseController@box');
         //抽奖
@@ -70,7 +69,8 @@ $api->version('v1', [
     $api->any('date', 'ListController@date');
     //获取某一周的开始日期和结束日期
     $api->any('weekday', 'ListController@w');
-
+    //群集结查询
+    Route::get('massquery', 'Api\MassController@massquery');
     //抽奖奖品
     $api->any('lottery', 'ElseController@lottery');
 

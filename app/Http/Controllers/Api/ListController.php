@@ -111,8 +111,9 @@ class ListController extends Controller
             $rank->d = $d;
             $rank->w = $w;
             $rank->mingci = $request->input('mingci');
-            $user->votenum=$user['votenum']- ($request->input('mingci'));
             $rank->save();
+            $user->votenum=$user['votenum']- ($request->input('mingci'));
+            $user->save();
             return $this->success($rank);
         } else {
             return $this->success('错误');

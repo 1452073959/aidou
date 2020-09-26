@@ -198,5 +198,20 @@ class ListController extends Controller
         return $this->success($rank);
     }
 
+    //明星搜索
+    public function search(Request $request)
+    {
+        $builder = Celebrity::query();
+        // 判断是否有提交 search 参数，如果有就赋值给 $search 变量
+        if ($search = $request->input('search', '')) {
+            $like = '%'.$search.'%';
+            $builder->where(function ($query) use ($like) {
+                $query->where('name', 'like', $like);
+            });
+        }
+        $celebrity = $builder->get();
+        return $this->success($celebrity);
+    }
+
 
 }

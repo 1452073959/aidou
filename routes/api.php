@@ -88,9 +88,11 @@ $api->version('v1', [
     $api->any('banner', 'ElseController@banner');
     //粉丝榜
     $api->any('fanlist', 'ListController@fanlist');
+
     //后台用
     $api->get('cate', 'AssistanceController@admincate');
-
+    //搜索
+    $api->get('search', 'ListController@search');
 
     Route::get('version', function() {
         return 'this is version v1';

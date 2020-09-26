@@ -79,7 +79,7 @@ class UserController extends Controller
             $user->sign_num = $user['sign_num']+1;
             $user->save();
 
-            if($user['sign_num']>7){
+            if($user['sign_num']<7){
                 $num=100*$user['sign_num'];
                 $user->votenum=$user['diamondnum']+(100*$user['sign_num']);
                 $user->save();
@@ -87,7 +87,7 @@ class UserController extends Controller
             }else{
                 $user->votenum=$user['votenum']+100;
                 $user->save();
-                return $this->success(['msg'=>'签到成功,获得绑票`','num'=>100]);
+                return $this->success(['msg'=>'签到成功,获得票`','num'=>100]);
             }
         }else{
             return $this->success('今天已经签过到了');

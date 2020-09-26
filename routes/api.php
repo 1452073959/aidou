@@ -66,7 +66,8 @@ $api->version('v1', [
         //拼呗
         //项目发起
         $api->post('spellstore','Api\SpellController@store');
-
+        //手机号解密
+        $api->post('phone', 'Api\Dccontroller@phone');
 
     });
 
@@ -103,8 +104,7 @@ $api->version('v1', [
     //搜索
     $api->get('search', 'ListController@search');
     $api->get('and', 'ListController@and');
-    //手机号解密
-    $api->get('phone', 'Dccontroller@phone');
+
 
 
     Route::get('version', function() {

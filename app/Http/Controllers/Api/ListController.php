@@ -102,6 +102,7 @@ class ListController extends Controller
         $m = date('m', time());
         $d = date('d', time());
         $w = date('W', time());
+
         if ($request->has('celebrity_id') && $request->has('mingci')) {
             $rank = new Ranking();
             $rank->celebrity_id = $request->input('celebrity_id');
@@ -110,7 +111,11 @@ class ListController extends Controller
             $rank->m = $m;
             $rank->d = $d;
             $rank->w = $w;
-            $rank->mingci = $request->input('mingci');
+            if($request->has('double')){
+                $rank->mingci = $request->input('mingci')*2;
+            }else{
+                $rank->mingci = $request->input('mingci');
+            }
             $rank->save();
             $user->votenum=$user['votenum']- ($request->input('mingci'));
             $user->save();

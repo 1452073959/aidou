@@ -47,15 +47,19 @@ class TreeController extends Controller
         ]);
     }
     //收取钻石
-    public function take()
+    public function take(Request $request)
     {
         $user = auth('api')->user();
 //        dd($user->toarray());
         $gradenum=$user->tree()->with('speed')->first();
 //        dd($gradenum->toarray());
-        DB::transaction(function ()  use ($user,$gradenum) {
+        DB::transaction(function ()  use ($user,$gradenum,$request) {
             $user->tree()->update(['collect'=>0,'total'=>$gradenum['total']+$gradenum['collect'],'last_time'=>time()]);
-            $user->diamondnum=$user['diamondnum']+$gradenum['collect'];
+            if($request->has('double')){
+                $user->diamondnum=($user['diamondnum']+$gradenum['collect'])*2;
+            }else{
+                $user->diamondnum=$user['diamondnum']+$gradenum['collect'];
+            }
             $user->save();
         });
         $gradenum=$user->tree()->with('speed')->first();

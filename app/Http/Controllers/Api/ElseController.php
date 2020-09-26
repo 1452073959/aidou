@@ -23,8 +23,6 @@ class ElseController extends Controller
     public function box(Request $request)
     {
         $rand = rand(10, 30);
-
-
         if ($request->has('pid')) {
             $flight = User::find(request('pid'));
             $flight->diamondnum = ($flight['diamondnum'] += 0) + $rand;
@@ -78,6 +76,8 @@ class ElseController extends Controller
         $project = Project::get();
         return $this->success($project);
     }
+
+
 
 
 }

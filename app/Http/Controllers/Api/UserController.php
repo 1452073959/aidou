@@ -23,13 +23,21 @@ class UserController extends Controller
         $flight = User::find($user['id']);
         $num=request('num',0);
         if($request->has('type')){
+            //票
             if($request->input('type')==1){
                 $flight->diamondnum = ($flight['diamondnum']+=0) + $num;
             }
-            //票
             //积分
             if($request->input('type')==2){
                 $flight->votenum = ($flight['votenum']+=0) + $num;
+            }
+            //抽奖
+            if($request->input('type')==3){
+                $flight->drawamount = ($flight['drawamount']+=0) + $num;
+            }
+            //箱子
+            if($request->input('type')==4){
+                $flight->box = ($flight['box']+=0) + $num;
             }
             $flight->save();
             return $this->success('领取成功');

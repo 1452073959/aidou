@@ -23,6 +23,8 @@ class ElseController extends Controller
     public function box(Request $request)
     {
         $rand = rand(10, 30);
+
+
         if ($request->has('pid')) {
             $flight = User::find(request('pid'));
             $flight->diamondnum = ($flight['diamondnum'] += 0) + $rand;
@@ -35,6 +37,9 @@ class ElseController extends Controller
         if (!$request->has('pid')) {
             $user->box = $user['box'] - 1;
         };
+        if($request->has('and')){
+            $user->box = $user['box'] - 1;
+        }
         $user->save();
 
 //        dd($boxnum->toarray());

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\Controller;
 use App\Models\Banner;
+use App\Models\Bulletin;
 use App\Models\Lottery;
 use App\Models\Project;
 use App\Models\User;
@@ -47,20 +48,29 @@ class ElseController extends Controller
         if ($user['drawamount'] <= 0) {
             return $this->success('不能再抽了');
         }
-        $user->drawamount=$user['drawamount']-1;
+        $user->drawamount = $user['drawamount'] - 1;
         $user->save();
-        return $this->success(['drawamount' =>$user['drawamount']]);
+        return $this->success(['drawamount' => $user['drawamount']]);
     }
 
+    //banner
     public function banner()
     {
         $banner = Banner::all();
         return $this->success($banner);
     }
+
+    //公告
+    public function bulletin()
+    {
+        $bulletin = Bulletin::get();
+        return $this->success($bulletin);
+    }
+
     //项目
     public function project()
     {
-        $project=Project::get();
+        $project = Project::get();
         return $this->success($project);
     }
 

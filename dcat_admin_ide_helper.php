@@ -20,6 +20,7 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection config
      * @property Grid\Column|Collection require
      * @property Grid\Column|Collection require_dev
+     * @property Grid\Column|Collection status
      * @property Grid\Column|Collection id
      * @property Grid\Column|Collection parent_id
      * @property Grid\Column|Collection order
@@ -48,11 +49,11 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection img
      * @property Grid\Column|Collection stocksnum
      * @property Grid\Column|Collection tel
-     * @property Grid\Column|Collection status
      * @property Grid\Column|Collection url
      * @property Grid\Column|Collection boxnum
      * @property Grid\Column|Collection max
      * @property Grid\Column|Collection min
+     * @property Grid\Column|Collection text
      * @property Grid\Column|Collection backimage
      * @property Grid\Column|Collection influencenum
      * @property Grid\Column|Collection speed_id
@@ -94,7 +95,7 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection award
      * @property Grid\Column|Collection what
      * @property Grid\Column|Collection linit
-     * @property Grid\Column|Collection newlimit
+     * @property Grid\Column|Collection newlimt
      * @property Grid\Column|Collection nickname
      * @property Grid\Column|Collection weapp_avatar
      * @property Grid\Column|Collection weapp_openid
@@ -114,6 +115,7 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection config(string $label = null)
      * @method Grid\Column|Collection require(string $label = null)
      * @method Grid\Column|Collection require_dev(string $label = null)
+     * @method Grid\Column|Collection status(string $label = null)
      * @method Grid\Column|Collection id(string $label = null)
      * @method Grid\Column|Collection parent_id(string $label = null)
      * @method Grid\Column|Collection order(string $label = null)
@@ -142,11 +144,11 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection img(string $label = null)
      * @method Grid\Column|Collection stocksnum(string $label = null)
      * @method Grid\Column|Collection tel(string $label = null)
-     * @method Grid\Column|Collection status(string $label = null)
      * @method Grid\Column|Collection url(string $label = null)
      * @method Grid\Column|Collection boxnum(string $label = null)
      * @method Grid\Column|Collection max(string $label = null)
      * @method Grid\Column|Collection min(string $label = null)
+     * @method Grid\Column|Collection text(string $label = null)
      * @method Grid\Column|Collection backimage(string $label = null)
      * @method Grid\Column|Collection influencenum(string $label = null)
      * @method Grid\Column|Collection speed_id(string $label = null)
@@ -188,7 +190,7 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection award(string $label = null)
      * @method Grid\Column|Collection what(string $label = null)
      * @method Grid\Column|Collection linit(string $label = null)
-     * @method Grid\Column|Collection newlimit(string $label = null)
+     * @method Grid\Column|Collection newlimt(string $label = null)
      * @method Grid\Column|Collection nickname(string $label = null)
      * @method Grid\Column|Collection weapp_avatar(string $label = null)
      * @method Grid\Column|Collection weapp_openid(string $label = null)
@@ -213,6 +215,7 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection config
      * @property Show\Field|Collection require
      * @property Show\Field|Collection require_dev
+     * @property Show\Field|Collection status
      * @property Show\Field|Collection id
      * @property Show\Field|Collection parent_id
      * @property Show\Field|Collection order
@@ -241,11 +244,11 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection img
      * @property Show\Field|Collection stocksnum
      * @property Show\Field|Collection tel
-     * @property Show\Field|Collection status
      * @property Show\Field|Collection url
      * @property Show\Field|Collection boxnum
      * @property Show\Field|Collection max
      * @property Show\Field|Collection min
+     * @property Show\Field|Collection text
      * @property Show\Field|Collection backimage
      * @property Show\Field|Collection influencenum
      * @property Show\Field|Collection speed_id
@@ -287,7 +290,7 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection award
      * @property Show\Field|Collection what
      * @property Show\Field|Collection linit
-     * @property Show\Field|Collection newlimit
+     * @property Show\Field|Collection newlimt
      * @property Show\Field|Collection nickname
      * @property Show\Field|Collection weapp_avatar
      * @property Show\Field|Collection weapp_openid
@@ -307,6 +310,7 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection config(string $label = null)
      * @method Show\Field|Collection require(string $label = null)
      * @method Show\Field|Collection require_dev(string $label = null)
+     * @method Show\Field|Collection status(string $label = null)
      * @method Show\Field|Collection id(string $label = null)
      * @method Show\Field|Collection parent_id(string $label = null)
      * @method Show\Field|Collection order(string $label = null)
@@ -335,11 +339,11 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection img(string $label = null)
      * @method Show\Field|Collection stocksnum(string $label = null)
      * @method Show\Field|Collection tel(string $label = null)
-     * @method Show\Field|Collection status(string $label = null)
      * @method Show\Field|Collection url(string $label = null)
      * @method Show\Field|Collection boxnum(string $label = null)
      * @method Show\Field|Collection max(string $label = null)
      * @method Show\Field|Collection min(string $label = null)
+     * @method Show\Field|Collection text(string $label = null)
      * @method Show\Field|Collection backimage(string $label = null)
      * @method Show\Field|Collection influencenum(string $label = null)
      * @method Show\Field|Collection speed_id(string $label = null)
@@ -381,7 +385,7 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection award(string $label = null)
      * @method Show\Field|Collection what(string $label = null)
      * @method Show\Field|Collection linit(string $label = null)
-     * @method Show\Field|Collection newlimit(string $label = null)
+     * @method Show\Field|Collection newlimt(string $label = null)
      * @method Show\Field|Collection nickname(string $label = null)
      * @method Show\Field|Collection weapp_avatar(string $label = null)
      * @method Show\Field|Collection weapp_openid(string $label = null)

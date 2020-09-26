@@ -29,4 +29,8 @@ Route::group([
     $router->resource('shenghe', 'AssistanceController');
 //    任务
     $router->resource('task', 'TaskController');
+
+    //公告
+    $router->resource('bulletin', 'BulletinController');
+
 });//

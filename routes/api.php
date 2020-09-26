@@ -78,14 +78,15 @@ $api->version('v1', [
     $api->any('celeberrank', 'ListController@celeberrank');
     //最后给明细投票的五个人
     $api->any('lastfans', 'ListController@lastfans');
-
+    //公告
+    Route::get('bulletin','Api\ElseController@bulletin');
     //用户信息
     Route::get('user','Api\UserController@usershow');
     //banner
     $api->any('banner', 'ElseController@banner');
     //粉丝榜
     $api->any('fanlist', 'ListController@fanlist');
-
+    //后台用
     $api->get('cate', 'AssistanceController@admincate');
 
 

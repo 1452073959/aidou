@@ -19,7 +19,7 @@ class ProjectController extends AdminController
     {
         return Grid::make(new Project(), function (Grid $grid) {
             $grid->column('id')->sortable();
-            $grid->column('title');
+            $grid->column('text');
             $grid->column('num');
         
             $grid->filter(function (Grid\Filter $filter) {
@@ -40,7 +40,7 @@ class ProjectController extends AdminController
     {
         return Show::make($id, new Project(), function (Show $show) {
             $show->field('id');
-            $show->field('title');
+            $show->field('text');
             $show->field('num');
         });
     }
@@ -54,7 +54,7 @@ class ProjectController extends AdminController
     {
         return Form::make(new Project(), function (Form $form) {
             $form->display('id');
-            $form->text('title');
+            $form->text('text');
             $form->text('num');
         });
     }

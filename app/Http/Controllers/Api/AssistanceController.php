@@ -17,16 +17,14 @@ class AssistanceController extends Controller
         $user = auth('api')->user();
         $data['user_id']=$user['id'];
        $res=  Assistance::create($data);
-
        if($res){
            return $this->success('发起应援成功');
        }
-
     }
     //应援列表
     public function assistancelist()
     {
-        $data=Assistance::where('status',2)->get();
+        $data=Assistance::with(['project','user'])->where('status',2)->get();
         return $this->success($data);
     }
     //应援详情
@@ -52,6 +50,15 @@ class AssistanceController extends Controller
             return $this->success('错误');
         }
     }
+
+    //我的应援
+    public function my()
+    {
+        $user = auth('api')->user();
+        $data= Assistance::with(['project','user'])->where('user_id',$user['id'])->get();
+        return $this->success($data);
+    }
+
 
 
     public function admincate(Request $request)

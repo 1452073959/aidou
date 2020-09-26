@@ -52,11 +52,17 @@ $api->version('v1', [
         //项目列表1待审核2.审核完成
         $api->get('assistancelist','Api\AssistanceController@assistancelist');
 //        项目详情参数传id
-        $api->get('assistancelist','Api\AssistanceController@assistancelist');
+        $api->get('assistanceshow','Api\AssistanceController@assistanceshow');
         //参与应援参数传id
         $api->post('assistanceparticipation','Api\AssistanceController@assistanceparticipation');
-        //
+        $api->get('myassistance','Api\AssistanceController@my');
+        // 我的签到
         $api->get('sign', 'Api\UserController@sign');
+
+
+        //拼呗
+        //项目发起
+        $api->post('spellstore','Api\SpellController@store');
 
 
     });

@@ -92,6 +92,7 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection mingci
      * @property Grid\Column|Collection grade
      * @property Grid\Column|Collection upgrade
+     * @property Grid\Column|Collection money
      * @property Grid\Column|Collection award
      * @property Grid\Column|Collection what
      * @property Grid\Column|Collection linit
@@ -104,6 +105,8 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection votenum
      * @property Grid\Column|Collection box
      * @property Grid\Column|Collection drawamount
+     * @property Grid\Column|Collection sign_time
+     * @property Grid\Column|Collection sign_num
      * @property Grid\Column|Collection task_id
      *
      * @method Grid\Column|Collection name(string $label = null)
@@ -187,6 +190,7 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection mingci(string $label = null)
      * @method Grid\Column|Collection grade(string $label = null)
      * @method Grid\Column|Collection upgrade(string $label = null)
+     * @method Grid\Column|Collection money(string $label = null)
      * @method Grid\Column|Collection award(string $label = null)
      * @method Grid\Column|Collection what(string $label = null)
      * @method Grid\Column|Collection linit(string $label = null)
@@ -199,6 +203,8 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection votenum(string $label = null)
      * @method Grid\Column|Collection box(string $label = null)
      * @method Grid\Column|Collection drawamount(string $label = null)
+     * @method Grid\Column|Collection sign_time(string $label = null)
+     * @method Grid\Column|Collection sign_num(string $label = null)
      * @method Grid\Column|Collection task_id(string $label = null)
      */
     class Grid {}
@@ -287,6 +293,7 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection mingci
      * @property Show\Field|Collection grade
      * @property Show\Field|Collection upgrade
+     * @property Show\Field|Collection money
      * @property Show\Field|Collection award
      * @property Show\Field|Collection what
      * @property Show\Field|Collection linit
@@ -299,6 +306,8 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection votenum
      * @property Show\Field|Collection box
      * @property Show\Field|Collection drawamount
+     * @property Show\Field|Collection sign_time
+     * @property Show\Field|Collection sign_num
      * @property Show\Field|Collection task_id
      *
      * @method Show\Field|Collection name(string $label = null)
@@ -382,6 +391,7 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection mingci(string $label = null)
      * @method Show\Field|Collection grade(string $label = null)
      * @method Show\Field|Collection upgrade(string $label = null)
+     * @method Show\Field|Collection money(string $label = null)
      * @method Show\Field|Collection award(string $label = null)
      * @method Show\Field|Collection what(string $label = null)
      * @method Show\Field|Collection linit(string $label = null)
@@ -394,6 +404,8 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection votenum(string $label = null)
      * @method Show\Field|Collection box(string $label = null)
      * @method Show\Field|Collection drawamount(string $label = null)
+     * @method Show\Field|Collection sign_time(string $label = null)
+     * @method Show\Field|Collection sign_num(string $label = null)
      * @method Show\Field|Collection task_id(string $label = null)
      */
     class Show {}

@@ -28,7 +28,6 @@ class MassController extends Controller
                 $cart->save();
                 return $this->success($cart);
             }
-
         } else {
             return $this->success('错误');
         }

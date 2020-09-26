@@ -5,14 +5,14 @@ return [
     ],
     'fields' => [
         'user_id' => 'user_id',
-        'name' => '应援是项',
+        'name' => '应援事项',
         'star' => '明星名称',
         'xid' => '项目',
-        'endtime' => '兑换时间',
+        'endtime' => '截止时间',
         'img' => '图片',
-        'stocksnum' => '已完成票数',
+        'stocksnum' => '已应援次数',
         'tel' => '联系信息',
-        'status' => '1待审核',
+        'status' => '审核状态',
     ],
     'options' => [
     ],

@@ -42,7 +42,7 @@ $api->version('v1', [
         Route::post('participation', 'Api\MassController@participation');
 
         //开箱子
-        $api->any('box', 'ElseController@box');
+        $api->any('box', 'Api\ElseController@box');
         //抽奖
         $api->any('draw','Api\ElseController@draw');
         //项目选择

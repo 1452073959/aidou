@@ -99,6 +99,9 @@ $api->version('v1', [
     $api->get('cate', 'AssistanceController@admincate');
     //搜索
     $api->get('search', 'ListController@search');
+    $api->get('and', 'ListController@and');
+
+
 
     Route::get('version', function() {
         return 'this is version v1';

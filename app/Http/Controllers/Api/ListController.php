@@ -118,9 +118,32 @@ class ListController extends Controller
         } else {
             return $this->success('错误');
         }
+    }
 
+    public function and()
+    {
+        $user = auth('api')->user();
+//        dd($user);
+        $y = date('Y', time());
+        $m = date('m', time());
+        $d = date('d', time());
+        $w = date('W', time());
+        $m1=Celebrity::all();
+        foreach ($m1 as $k=>$v)
+        {
+            $rank = new Ranking();
+            $rank->celebrity_id =$v['id'];
+            $rank->user_id = $user['id'];
+            $rank->y = $y;
+            $rank->m = $m;
+            $rank->d = $d;
+            $rank->w = $w;
+            $rank->mingci = 1;
+            $rank->save();
+        }
 
     }
+
 
     //明星排名/影响力
     public function celeberrank(Request $request)

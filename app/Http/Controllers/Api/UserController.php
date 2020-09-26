@@ -67,9 +67,10 @@ class UserController extends Controller
     {
         $now = time();
         $user = auth('api')->user();
-        $y = date('Y', time());
-        $m = date('m', time());
-        $d = date('d', time());
+        $last_time=$user['sign_time'];
+        $y = date('Y',$last_time);
+        $m = date('m',$last_time);
+        $d = date('d',$last_time);
         $allowTime= mktime(0,0,0,$m,$d,$y);
         $allowTime += 3600*24;
         // 过了允许签到的时间就给签到

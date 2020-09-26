@@ -7,6 +7,7 @@ use App\Models\Banner;
 use App\Models\Bulletin;
 use App\Models\Lottery;
 use App\Models\Project;
+use App\Models\Ranking;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -109,6 +110,13 @@ class ElseController extends Controller
     {
         $project = Project::get();
         return $this->success($project);
+    }
+//    打榜明细
+    public function rankshow()
+    {
+        $user = auth('api')->user();
+        $data=Ranking::with('celebrity','user')->where('user_id',$user['id'])->take(50)->get();
+        return $this->success($data);
     }
 
 

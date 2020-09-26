@@ -20,6 +20,8 @@ $api->version('v1', [
         Route::post('conversion', 'Api\UserController@conversion');
         //d打榜
         Route::post('rankadd', 'Api\ListController@rankadd');
+        Route::get('rankshow', 'Api\ElseController@rankshow');
+        //打榜明细
         //本人投过票的
         $api->any('merank', 'Api\ListController@merank');
         //钻石接口
@@ -55,6 +57,7 @@ $api->version('v1', [
         $api->get('assistanceshow','Api\AssistanceController@assistanceshow');
         //参与应援参数传id
         $api->post('assistanceparticipation','Api\AssistanceController@assistanceparticipation');
+        //我的应援
         $api->get('myassistance','Api\AssistanceController@my');
         // 我的签到
         $api->get('sign', 'Api\UserController@sign');

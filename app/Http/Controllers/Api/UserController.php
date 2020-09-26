@@ -91,11 +91,11 @@ class UserController extends Controller
                 $num=100*$user['sign_num'];
                 $user->votenum=$user['diamondnum']+(100*$user['sign_num']);
                 $user->save();
-                return $this->success(['msg'=>'签到成功,获得钻石`','num'=>$num]);
+                return $this->success(['msg'=>'签到成功,获得钻石`','num'=>$num,'type'=>1]);
             }else{
                 $user->votenum=$user['votenum']+100;
                 $user->save();
-                return $this->success(['msg'=>'签到成功,获得票`','num'=>100]);
+                return $this->success(['msg'=>'签到成功,获得票`','num'=>100,'type'=>2]);
             }
         }else{
             return $this->success('今天已经签过到了');

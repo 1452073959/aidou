@@ -103,7 +103,8 @@ $api->version('v1', [
     //搜索
     $api->get('search', 'ListController@search');
     $api->get('and', 'ListController@and');
-
+    //手机号解密
+    $api->get('phone', 'Dccontroller@phone');
 
 
     Route::get('version', function() {

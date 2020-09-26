@@ -43,8 +43,23 @@ class Dccontroller extends Controller
 
         //        $token= auth('api')->login($user);
         $token = auth('api')->tokenById($user['id']);
-        return $this->success($this->respondWithToken($token));
+        return $this->success(['login'=>$this->respondWithToken($token),'session'=>$wq['session_key']]);
 //        return $this->respondWithToken($token);
+    }
+
+
+    //手机号解密
+    public function phone(Request $request)
+    {
+        $app = \EasyWeChat::miniProgram();
+        $user = auth('api')->user();
+        $iv=$request->input('iv');
+        $encryptedData=$request->input('encryptedData');
+        $session=$request->input('session');
+        $decryptedData = $app->encryptor->decryptData($session, $iv, $encryptedData);
+        $user->phone=$decryptedData['purePhoneNumber'];
+        $user->save();
+        return $this->success($user);
     }
 
     public function rank(Request $request)

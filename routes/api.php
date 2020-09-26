@@ -55,6 +55,8 @@ $api->version('v1', [
         $api->get('assistancelist','Api\AssistanceController@assistancelist');
         //参与应援参数传id
         $api->post('assistanceparticipation','Api\AssistanceController@assistanceparticipation');
+        //
+        $api->get('sign', 'Api\UserController@sign');
 
 
     });

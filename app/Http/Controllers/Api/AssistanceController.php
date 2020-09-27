@@ -31,7 +31,7 @@ class AssistanceController extends Controller
     public function assistanceshow(Request $request)
     {
         if ($request->has('id')) {
-            $data=Assistance::find($request->input('id'));
+            $data=Assistance::with(['project','user'])->find($request->input('id'));
             return $this->success($data);
         }else{
             return $this->success('错误');

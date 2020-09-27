@@ -189,7 +189,7 @@ class ListController extends Controller
             $cel=Celebrity::all();
             $col=[];
             foreach ($cel as $key=>$val){
-                $rank = Ranking::with('user')->where($where)->where('celebrity_id', $val['id'])->groupBy('user_id')->paginate(10);
+                $rank = Ranking::with('user','celebrity')->where($where)->where('celebrity_id', $val['id'])->groupBy('user_id')->paginate(10);
                 foreach ($rank as $k =>$v) {
                     $rank[$k]['num']=array_sum( DB::table('ranking')->where($where)->where('user_id',$v['user_id'])->where('celebrity_id', $val['id'])->pluck('mingci')->toArray());
                 }

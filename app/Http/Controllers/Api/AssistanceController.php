@@ -42,7 +42,18 @@ class AssistanceController extends Controller
     public function assistanceparticipation(Request $request)
     {
         if ($request->has('id')) {
-            $data=Assistance::find($request->input('id'));
+            $data=Assistance::with(['project','user'])->find($request->input('id'));
+             $time=strtotime($data['endtime']);
+             if(time()>$time){
+                 $data->status=3;
+                 $data->save();
+                 return $this->success('应援已过期');
+             }
+            if($data['stocksnum']>=$data['project']['num']){
+                $data->status=4;
+                $data->save();
+                return $this->success('应援已完成');
+            }
             $data->stocksnum=$data['stocksnum']+1;
             $data->save();
             return $this->success($data);

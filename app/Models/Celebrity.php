@@ -4,7 +4,7 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\Redis;
 class Celebrity extends Model
 {
 	
@@ -30,6 +30,12 @@ class Celebrity extends Model
             $rank->w = $w;
             $rank->mingci =1;
             $rank->save();
+
+            Redis::flushall();
+        });
+
+        static::updated(function() {
+            Redis::flushall();
         });
     }
 }

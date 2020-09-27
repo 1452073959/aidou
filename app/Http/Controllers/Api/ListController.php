@@ -173,15 +173,29 @@ class ListController extends Controller
 //        $w=request('w', $w);
         $where = ['y' => $y, 'm' => $m,];
         if ($request->has('celebrity_id')) {
-            $rank = Ranking::with('user')->where($where)->where('celebrity_id', $request->input('celebrity_id'))->groupBy('user_id')->get();
+            $rank = Ranking::with('user')->where($where)->where('celebrity_id', $request->input('celebrity_id'))->groupBy('user_id')->paginate(10);
+//            dd($rank->toarray());
             foreach ($rank as $k => $v) {
                 $rank[$k]['num']=array_sum( DB::table('ranking')->where($where)->where('user_id',$v['user_id'])->where('celebrity_id', $request->input('celebrity_id'))->pluck('mingci')->toArray());
             }
+            $rank=$rank->toarray();
+            $newArr=array();
+            for($j=0;$j<count($rank['data']);$j++){
+                $newArr[]=$rank['data'][$j]['num'];
+}
+            array_multisort($newArr,SORT_DESC,$rank['data']);
+
         } else {
-            $rank = Ranking::with('user')->where($where)->groupBy('user_id')->get();
+            $rank = Ranking::with('user')->where($where)->groupBy('user_id')->paginate(10);
             foreach ($rank as $k => $v) {
                 $rank[$k]['num']=array_sum( DB::table('ranking')->where($where)->where('user_id',$v['user_id'])->pluck('mingci')->toArray());
             }
+            $rank=$rank->toarray();
+            $newArr=array();
+            for($j=0;$j<count($rank['data']);$j++){
+                $newArr[]=$rank['data'][$j]['num'];
+            }
+            array_multisort($newArr,SORT_DESC,$rank['data']);
         }
 
 

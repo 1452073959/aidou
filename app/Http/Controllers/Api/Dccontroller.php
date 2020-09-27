@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Ranking;
 use Illuminate\Support\Facades\DB;
-use Redis;
+use Illuminate\Support\Facades\Redis;
 
 class Dccontroller extends Controller
 {

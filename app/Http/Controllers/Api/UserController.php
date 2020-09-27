@@ -40,7 +40,7 @@ class UserController extends Controller
                 $flight->box = ($flight['box']+=0) + $num;
             }
             if($request->input('type')==5){
-                $flight->box = ($flight['box']+=0) -1;
+                $flight->boxtwo = ($flight['box']+=0) -1;
             }
             $flight->save();
             return $this->success('领取成功');
@@ -104,5 +104,12 @@ class UserController extends Controller
             return $this->success('今天已经签过到了');
         }
 
+    }
+
+    //订阅消息
+    public function subscription()
+    {
+        $app = \EasyWeChat::miniProgram();
+        $app->template_message->getTemplates($offset, $count);
     }
 }

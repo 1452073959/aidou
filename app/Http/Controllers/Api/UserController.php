@@ -110,6 +110,54 @@ class UserController extends Controller
     public function subscription()
     {
         $app = \EasyWeChat::miniProgram();
-        $app->template_message->getTemplates($offset, $count);
+       $moban= $app->subscribe_message->getTemplates();
+        $alluser=User::all();
+       foreach ($alluser as $k=>$v){
+           $data = [
+               'template_id' => 'RdSQCKuMqgJJaVbL_h6uEnpfWp89sP4gq9cgCiskr-A', // 所需下发的订阅模板id
+               'touser' => $v['weapp_openid'],     // 接收者（用户）的 openid
+               'page' => 'pages/index/index',      // 点击模板卡片后的跳转页面，仅限本小程序内的页面。支持带参数,（示例index?foo=bar）。该字段不填则模板无跳转。
+               'data' => [
+                   'thing1' => [
+                       'value'=>'每日签到开始啦!'
+                   ],
+                   'thing2' => [
+                       'value'=>'连续7天签到有奖励哦~'
+                   ],
+               ],
+           ];
+
+           $app->subscribe_message->send($data);
+       }
+
+
+    }
+
+
+    public function subscription2()
+    {
+        $app = \EasyWeChat::miniProgram();
+        $moban= $app->subscribe_message->getTemplates();
+        $alluser=User::all();
+        foreach ($alluser as $k=>$v){
+        $data = [
+            'template_id' => 'eF7rzChPMPR1lN6Pqv6Ql7sbZ9fRrtVZMYtcbh6Vkg8', // 所需下发的订阅模板id
+            'touser' =>$v['weapp_openid'],     // 接收者（用户）的 openid
+            'page' => 'pages/index/index',      // 点击模板卡片后的跳转页面，仅限本小程序内的页面。支持带参数,（示例index?foo=bar）。该字段不填则模板无跳转。
+            'data' => [
+                'thing1' => [
+                    'value'=>'爱豆等你很久了~!'
+                ],
+                'date4' => [
+                    'value'=>date('y-m-d h:i:s',time())
+                ],
+                'thing6' => [
+                    'value'=>'周榜进行中~'
+                ],
+            ],
+        ];
+
+        $app->subscribe_message->send($data);
+        }
     }
 }

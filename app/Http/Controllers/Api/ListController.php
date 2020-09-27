@@ -154,7 +154,7 @@ class ListController extends Controller
     public function celeberrank(Request $request)
     {
         $celebr = Celebrity::find($request->input('celebrity_id'));
-        $order = Redis::zrank('zset1', $celebr);
+        $order = Redis::zrevrank ('zset1', $celebr);
         $b = Redis::zscore('zset1', $celebr);
         return $this->success(['user' => $celebr, 'order' => $order, 'sum' => $b]);
 

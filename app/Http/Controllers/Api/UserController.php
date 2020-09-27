@@ -39,6 +39,9 @@ class UserController extends Controller
             if($request->input('type')==4){
                 $flight->box = ($flight['box']+=0) + $num;
             }
+            if($request->input('type')==5){
+                $flight->box = ($flight['box']+=0) -1;
+            }
             $flight->save();
             return $this->success('领取成功');
         }else{

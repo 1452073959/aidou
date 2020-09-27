@@ -53,9 +53,12 @@ class ElseController extends Controller
         $user = auth('api')->user();
         //开启分享箱子
         if ($request->has('pid')) {
-            //分享人增加
+            //分享人增加钻石 且减少开箱子数
             $flight = User::find(request('pid'));
             $flight->diamondnum = ($flight['diamondnum'] += 0) + $rand;
+            if($flight['box']== $flight['boxtwo']+1 ){
+                $flight->box = $flight['box'] - 1;
+            }
             $flight->save();
             //开箱人增加
             $user->diamondnum = ($user['diamondnum'] += 0) + $rand1;
@@ -64,12 +67,6 @@ class ElseController extends Controller
         };
         if ($user['box'] <= 0) {
             return $this->success('不能再开了');
-        }
-        //发起分享箱子  减次数 不加钻石
-        if($request->has('and')){
-            $user->box = $user['box'] - 1;
-            $user->save();
-            return  $this->success(['boxnum' => $user['box']]);
         }
         //免费第一次箱子
         if($user['box']==6){

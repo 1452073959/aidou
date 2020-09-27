@@ -186,16 +186,24 @@ class ListController extends Controller
             array_multisort($newArr,SORT_DESC,$rank['data']);
 
         } else {
-            $rank = Ranking::with('user')->where($where)->groupBy('user_id')->paginate(10);
-            foreach ($rank as $k => $v) {
-                $rank[$k]['num']=array_sum( DB::table('ranking')->where($where)->where('user_id',$v['user_id'])->pluck('mingci')->toArray());
+            $cel=Celebrity::all();
+            $col=[];
+            foreach ($cel as $key=>$v){
+                $rank = Ranking::with('user')->where($where)->where('celebrity_id', $v['id'])->groupBy('user_id')->paginate(10);
+                foreach ($rank as $k => $v) {
+                    $rank[$k]['num']=array_sum( DB::table('ranking')->where($where)->where('user_id',$v['user_id'])->pluck('mingci')->toArray());
+                }
+                $rank=$rank->toarray();
+                $newArr=array();
+                for($j=0;$j<count($rank['data']);$j++){
+                    $newArr[]=$rank['data'][$j]['num'];
+                }
+                array_multisort($newArr,SORT_DESC,$rank['data']);
+                $col[]=$rank['data']['0'];
             }
-            $rank=$rank->toarray();
-            $newArr=array();
-            for($j=0;$j<count($rank['data']);$j++){
-                $newArr[]=$rank['data'][$j]['num'];
-            }
-            array_multisort($newArr,SORT_DESC,$rank['data']);
+
+            return $this->success($col);
+
         }
 
 

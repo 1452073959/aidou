@@ -54,7 +54,7 @@ class ListController extends Controller
 //        dump($where);
 
         $rank = Ranking::with('celebrity')->where($where)->get();
-                dd($rank->toArray());
+//                dd($rank->toArray());
         $genre = $rank->groupBy('celebrity_id');
         foreach ($genre as $k => $v) {
             $sum = 0;

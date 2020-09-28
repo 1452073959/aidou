@@ -49,9 +49,13 @@ class ListController extends Controller
         $y = request('y', $y);
         $m = request('m', $m);
         $w = request('w', $w);
+        if($request->has('w')){
+            $where = ['y' => $y, 'm' => $m, 'w' => (string)$w];
+        }   else{
+            $where = ['y' => $y, 'm' => $m,];
+        }
 
-        $where = ['y' => $y, 'm' => $m, 'w' => (string)$w];
-//        dump($where);
+
 
         $rank = Ranking::with('celebrity')->where($where)->get();
 

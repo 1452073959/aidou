@@ -2,9 +2,11 @@
 
 namespace App\Console;
 
+use App\Models\Task;
+use App\Models\User;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-
+use  Illuminate\Support\Facades\DB;
 class Kernel extends ConsoleKernel
 {
     /**
@@ -25,8 +27,14 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->call(function () {
+            DB::table('users')->update(['drawamount'=>4]);
+            $a=Task::where('type',2)->pluck('id');
+            DB::table('users_task')->whereIn('task_id',$a)->update(['status'=>1,'sum'=>0]);
+        })->daily();
+        $schedule->call(function () {
+            DB::table('users')->update(['boxtwo'=>5,'box'=>6]);
+        })->twiceDaily(7, 22);
     }
 
     /**

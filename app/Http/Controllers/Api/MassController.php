@@ -23,8 +23,8 @@ class MassController extends Controller
                 $cart = new Qunmass();
                 $cart->user()->associate($user);
                 $cart->celbrity()->associate($request->input('celebrity_id'));
-                $cart->end_time = time() + 3600;
-                $cart->del_time = time() + (3600 * 3);
+                $cart->end_time = time() + (3600*3);
+                $cart->del_time = time() + (3600 * 5);
                 $cart->save();
                 return $this->success($cart);
             }
@@ -44,8 +44,16 @@ class MassController extends Controller
                 return $this->success('该集结您已参与过');
             } else {
                 $participation=Qunmass::find( $request->input('qunmass_id'));
+                if(!$participation){
+                    return $this->success('该集结已失效');
+                };
                 if($user['id']==$participation['user_id']){
                     return $this->success('发起人已经默认参与哟!');
+                }
+
+                if($participation['del_time']<time()){
+                    Qunmass::destroy( $request->input('qunmass_id'));
+                    return $this->success('该集结已失效');
                 }
 //                dump($participation);
                 if($participation['end_time']<time()){

@@ -10,7 +10,7 @@ class Ranking extends Model
 	
     protected $table = 'ranking';
     public $timestamps = false;
-
+    protected $guarded = [];
 
     public function celebrity()
     {

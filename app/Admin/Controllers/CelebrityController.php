@@ -62,9 +62,9 @@ class CelebrityController extends AdminController
     {
         return Form::make(new Celebrity(), function (Form $form) {
             $form->display('id');
-            $form->text('name');
-            $form->image('avatar')->disableRemove()->uniqueName();;
-            $form->image('backimage')->disableRemove()->uniqueName();;
+            $form->text('name')->required();;
+            $form->image('avatar')->disableRemove()->uniqueName()->required();
+            $form->image('backimage')->disableRemove()->uniqueName()->required();
 //            $form->number('influencenum');
         
             $form->display('created_at');

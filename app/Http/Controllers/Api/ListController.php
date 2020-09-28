@@ -49,14 +49,17 @@ class ListController extends Controller
         $y = request('y', $y);
         $m = request('m', $m);
         $w = request('w', $w);
-        if($request->has('w')){
+        if(!$request->has('y')){
             $where = ['y' => $y, 'm' => $m, 'w' => (string)$w];
-        }   else{
-            $where = ['y' => $y, 'm' => $m,];
+        }
+        if($request->has('y')&&$request->has('m')){
+            $where = ['y' => $y, 'm' => $m];
+        }
+        if($request->has('y')&&$request->has('w')){
+            $where = ['y' => $y, 'm' => $m, 'w' => (string)$w];
         }
 
-
-
+//        dump($where);
         $rank = Ranking::with('celebrity')->where($where)->get();
 
         $genre = $rank->groupBy('celebrity_id');

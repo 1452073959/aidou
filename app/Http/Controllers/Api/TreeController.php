@@ -56,7 +56,7 @@ class TreeController extends Controller
         DB::transaction(function ()  use ($user,$gradenum,$request) {
             $user->tree()->update(['collect'=>0,'total'=>$gradenum['total']+$gradenum['collect'],'last_time'=>time()]);
             if($request->has('double')){
-                $user->diamondnum=($user['diamondnum']+$gradenum['collect'])*2;
+                $user->diamondnum=$user['diamondnum']+($gradenum['collect']*2);
             }else{
                 $user->diamondnum=$user['diamondnum']+$gradenum['collect'];
             }

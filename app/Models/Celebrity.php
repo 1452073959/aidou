@@ -17,6 +17,7 @@ class Celebrity extends Model
         parent::boot();
         // 监听模型创建事件，在写入数据库之前触发
         static::created(function ($model) {
+            Redis::flushall();
             $y = date('Y', time());
             $m = date('m', time());
             $d = date('d', time());
@@ -31,7 +32,6 @@ class Celebrity extends Model
             $rank->mingci =1;
             $rank->save();
 
-            Redis::flushall();
         });
 
         static::updated(function() {

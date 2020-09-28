@@ -54,8 +54,9 @@ class ListController extends Controller
 //        dump($where);
 
         $rank = Ranking::with('celebrity')->where($where)->get();
-//                dd($rank->toArray());
+
         $genre = $rank->groupBy('celebrity_id');
+        Redis::flushall();
         foreach ($genre as $k => $v) {
             $sum = 0;
             foreach ($v as $k1 => $v2) {
@@ -68,6 +69,7 @@ class ListController extends Controller
 //        //倒序
 //      dump(Redis::zrevrange("zset1",0,-1));
 //      dump(Redis::scan("zset1",0,-1));
+
         $data = Redis::zrevrange('zset1', 0, $num, 'withscores');//返回有序集合的所有值
 //            dd($data);
 //        $data=json_encode($data);

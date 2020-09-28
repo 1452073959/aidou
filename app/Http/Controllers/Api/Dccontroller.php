@@ -179,4 +179,38 @@ class Dccontroller extends Controller
 
         return $weekday;
     }
+
+
+
+//    public function swoolecurl($data)
+//    {
+//        dd(123);
+//        $curl = curl_init();
+//        curl_setopt($curl, CURLOPT_URL, "http://服务器ip:9501");
+//        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+//        curl_setopt($curl, CURLOPT_HEADER, 1);
+//        curl_setopt($curl, CURLOPT_POST, 1);
+//        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+//        curl_exec($curl);
+//        curl_close($curl);
+//    }
+//
+    public function swoolecurl($data)
+    {
+//        dd(123);
+         $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, "http://aidou.test:9501");
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_HEADER, 1);
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+        curl_exec($curl);
+        curl_close($curl);
+    }
+
+     public function activepush()
+     {
+         $param['scene'] = '主动推送消息';
+         $this->swoolecurl($param);            // 主动推送消息
+     }
 }

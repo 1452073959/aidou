@@ -14,12 +14,10 @@ class ListController extends Controller
     //获取有哪些月份
     public function date()
     {
-//        dd(123) ;
-
         $y = Ranking::groupBy('y')->orderby('y', 'desc')->pluck('y');
         $m = Ranking::groupBy('m')->orderby('m', 'desc')->pluck('m');
         $w = Ranking::groupBy('w')->orderby('w', 'desc')->pluck('w');
-//dd(0.);
+
         return $this->success(['Y' => $y, 'm' => $m, 'w' => $w]);
     }
 
@@ -56,7 +54,7 @@ class ListController extends Controller
 //        dump($where);
 
         $rank = Ranking::with('celebrity')->where($where)->get();
-//                dd($rank->toArray());
+                dd($rank->toArray());
         $genre = $rank->groupBy('celebrity_id');
         foreach ($genre as $k => $v) {
             $sum = 0;
@@ -269,7 +267,13 @@ class ListController extends Controller
                 $query->where('name', 'like', $like);
             });
         }
+
         $celebrity = $builder->get();
+        foreach ($celebrity as $k=>$v)
+        {
+            $celebrity[$k]['influencenum']=Redis::zscore('zset1',$v);
+        }
+
         return $this->success($celebrity);
     }
 

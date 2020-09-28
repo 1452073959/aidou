@@ -109,6 +109,11 @@ $api->version('v1', [
     $api->get('and', 'ListController@and');
 
 
+    $api->get('swoole', 'Dccontroller@activepush');
+
+
+
+
 
     Route::get('version', function() {
         return 'this is version v1';

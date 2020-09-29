@@ -22,7 +22,14 @@ class SpeedController extends AdminController
             $grid->column('grade');
             $grid->column('num');
             $grid->column('upgrade');
-        
+            //            $grid->disableDeleteButton();
+//            $grid->disableEditButton();
+            $grid->disableQuickEditButton();
+            //关闭新增按钮
+//            $grid->disableCreateButton();
+            // 禁用过滤器按钮
+            $grid->disableFilterButton();
+            $grid->disableViewButton();
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
         
@@ -59,6 +66,12 @@ class SpeedController extends AdminController
             $form->text('grade');
             $form->text('num');
             $form->text('upgrade');
+            $form->disableResetButton();
+            $form->disableViewCheck();
+            $form->disableEditingCheck();
+            $form->disableCreatingCheck();
+            // 去除整个工具栏内容
+            $form->disableHeader();
         });
     }
 }

@@ -1,10 +1,10 @@
 <?php 
 return [
     'labels' => [
-        'Project' => 'Project',
+        'Project' => '应援项目设置',
     ],
     'fields' => [
-        'title' => '项目名称',
+        'text' => '项目名称',
         'num' => '票数',
     ],
     'options' => [

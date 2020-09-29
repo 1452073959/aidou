@@ -26,9 +26,17 @@ class UserController extends AdminController
             $grid->column('diamondnum');
             $grid->column('votenum');
 //            $grid->column('box');
+            //$grid->disableDeleteButton();
+//            $grid->disableEditButton();
+            $grid->disableQuickEditButton();
+            //关闭新增按钮
+            $grid->disableCreateButton();
+            // 禁用过滤器按钮
+            $grid->disableFilterButton();
+            $grid->disableViewButton();
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
-        
+
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
         
@@ -75,7 +83,12 @@ class UserController extends AdminController
             $form->text('diamondnum');
             $form->text('votenum');
             $form->text('box');
-        
+            $form->disableResetButton();
+            $form->disableViewCheck();
+            $form->disableEditingCheck();
+            $form->disableCreatingCheck();
+            // 去除整个工具栏内容
+            $form->disableHeader();
             $form->display('created_at');
             $form->display('updated_at');
         });

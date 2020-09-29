@@ -20,12 +20,19 @@ class LotteryController extends AdminController
         return Grid::make(new Lottery(), function (Grid $grid) {
             $grid->column('id')->sortable();
             $grid->column('title');
-            $grid->column('type');
+            $grid->column('type')->using([1 => '钻石', 2 => '票']);
             $grid->column('sum');
-        
+            //            $grid->disableDeleteButton();
+//            $grid->disableEditButton();
+            $grid->disableQuickEditButton();
+            //关闭新增按钮
+//            $grid->disableCreateButton();
+            // 禁用过滤器按钮
+            $grid->disableFilterButton();
+            $grid->disableViewButton();
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
-        
+
             });
         });
     }
@@ -58,8 +65,14 @@ class LotteryController extends AdminController
             $form->display('id');
             $form->text('title')->required();
             $form->radio('type')->options([
-                '1' => '钻石', '2'=> '票',
+                '1' => '钻石', '2' => '票',
             ])->required();
+            $form->disableResetButton();
+            $form->disableViewCheck();
+            $form->disableEditingCheck();
+            $form->disableCreatingCheck();
+            // 去除整个工具栏内容
+            $form->disableHeader();
             $form->text('sum')->required();
         });
     }

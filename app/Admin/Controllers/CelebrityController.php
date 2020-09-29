@@ -25,7 +25,14 @@ class CelebrityController extends AdminController
 //            $grid->column('influencenum');
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
-        
+//            $grid->disableDeleteButton();
+//            $grid->disableEditButton();
+            $grid->disableQuickEditButton();
+            //关闭新增按钮
+//            $grid->disableCreateButton();
+            // 禁用过滤器按钮
+            $grid->disableFilterButton();
+            $grid->disableViewButton();
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
         
@@ -66,7 +73,12 @@ class CelebrityController extends AdminController
             $form->image('avatar')->disableRemove()->uniqueName()->required();
             $form->image('backimage')->disableRemove()->uniqueName()->required();
 //            $form->number('influencenum');
-        
+            $form->disableResetButton();
+            $form->disableViewCheck();
+            $form->disableEditingCheck();
+            $form->disableCreatingCheck();
+            // 去除整个工具栏内容
+            $form->disableHeader();
             $form->display('created_at');
             $form->display('updated_at');
         });

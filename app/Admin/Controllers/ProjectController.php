@@ -21,7 +21,14 @@ class ProjectController extends AdminController
             $grid->column('id')->sortable();
             $grid->column('text');
             $grid->column('num');
-        
+            //            $grid->disableDeleteButton();
+//            $grid->disableEditButton();
+            $grid->disableQuickEditButton();
+            //关闭新增按钮
+//            $grid->disableCreateButton();
+            // 禁用过滤器按钮
+            $grid->disableFilterButton();
+            $grid->disableViewButton();
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
         
@@ -56,6 +63,12 @@ class ProjectController extends AdminController
             $form->display('id');
             $form->text('text');
             $form->text('num');
+            $form->disableResetButton();
+            $form->disableViewCheck();
+            $form->disableEditingCheck();
+            $form->disableCreatingCheck();
+            // 去除整个工具栏内容
+            $form->disableHeader();
         });
     }
 }

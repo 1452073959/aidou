@@ -1,7 +1,7 @@
 <?php 
 return [
     'labels' => [
-        'Celebrity' => 'Celebrity',
+        'Celebrity' => '明星',
     ],
     'fields' => [
         'name' => '明星姓名',

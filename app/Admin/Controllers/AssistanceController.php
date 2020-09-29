@@ -23,8 +23,12 @@ class AssistanceController extends AdminController
 
             $grid->model()->with(['user']);
             $grid->column('user.nickname', '用户');
+
             $grid->column('name');
             $grid->column('star');
+            $grid->model()->with(['project']);
+            $grid->column('project.text', '项目');
+//            $grid->model()->with(['project.name']);
             $grid->column('xid');
             $grid->column('endtime');
 //            $grid->column('img');
@@ -39,7 +43,14 @@ class AssistanceController extends AdminController
             );;
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
-        
+            //            $grid->disableDeleteButton();
+//            $grid->disableEditButton();
+            $grid->disableQuickEditButton();
+            //关闭新增按钮
+//            $grid->disableCreateButton();
+            // 禁用过滤器按钮
+            $grid->disableFilterButton();
+            $grid->disableViewButton();
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
         

@@ -1,7 +1,7 @@
 <?php 
 return [
     'labels' => [
-        'Assistance' => 'Assistance',
+        'Assistance' => '应援列表',
     ],
     'fields' => [
         'user_id' => 'user_id',

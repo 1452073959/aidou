@@ -1,11 +1,11 @@
 <?php 
 return [
     'labels' => [
-        'Banner' => 'Banner',
+        'Banner' => '轮播图',
     ],
     'fields' => [
-        'img' => 'img',
-        'url' => 'url',
+        'img' => '图片',
+        'url' => '链接',
     ],
     'options' => [
     ],

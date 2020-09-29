@@ -1,11 +1,11 @@
 <?php 
 return [
     'labels' => [
-        'Bulletin' => 'Bulletin',
+        'Bulletin' => '公告',
     ],
     'fields' => [
-        'text' => 'text',
-        'url' => 'url',
+        'text' => '文字',
+        'url' => '链接',
     ],
     'options' => [
     ],

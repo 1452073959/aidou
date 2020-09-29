@@ -21,7 +21,15 @@ class BannerController extends AdminController
             $grid->column('id')->sortable();
             $grid->column('img')->image();
             $grid->column('url');
-        
+
+            //            $grid->disableDeleteButton();
+//            $grid->disableEditButton();
+            $grid->disableQuickEditButton();
+            //关闭新增按钮
+//            $grid->disableCreateButton();
+            // 禁用过滤器按钮
+            $grid->disableFilterButton();
+            $grid->disableViewButton();
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
         
@@ -56,9 +64,15 @@ class BannerController extends AdminController
             $form->display('id');
             $form->image('img')->uniqueName();;
             $form->url('url');
-            $form->radio('status')->options([
+            $form->radio('status','类型')->options([
                 1 => '图文', 2 => '跳转小程序',3=>'榜单明星',4=>'其他'
             ])->required();
+            $form->disableResetButton();
+            $form->disableViewCheck();
+            $form->disableEditingCheck();
+            $form->disableCreatingCheck();
+            // 去除整个工具栏内容
+            $form->disableHeader();
         });
     }
 }

@@ -68,10 +68,7 @@ $api->version('v1', [
         $api->post('spellstore','Api\SpellController@store');
         //手机号解密
         $api->post('phone', 'Api\Dccontroller@phone');
-        //模板消息
-        $api->get('subscription', 'Api\UserController@subscription');
-        //模板消息2
-        $api->get('subscription2', 'Api\UserController@subscription2');
+
     });
 
     // 登录
@@ -111,7 +108,10 @@ $api->version('v1', [
 
     $api->get('swoole', 'Dccontroller@activepush');
 
-
+    //模板消息
+    $api->get('subscription', 'Api\UserController@subscription');
+    //模板消息2
+    $api->get('subscription2', 'Api\UserController@subscription2');
 
 
 

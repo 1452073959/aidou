@@ -199,7 +199,7 @@ class Dccontroller extends Controller
     {
 //        dd(123);
          $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, "http://aidou.test:9501");
+        curl_setopt($curl, CURLOPT_URL, "https://aidou.hafpay.com:5000/");
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_HEADER, 1);
         curl_setopt($curl, CURLOPT_POST, 1);

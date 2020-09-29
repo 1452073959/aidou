@@ -195,9 +195,10 @@ class Dccontroller extends Controller
 //        curl_close($curl);
 //    }
 //
-    public function swoolecurl($param)
+    public function swoolecurl(Request $request)
     {
-//        dd(123);
+        $param =$request->input('lol');
+//        dd($param);
          $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, "http://152.136.101.238:9501");
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);

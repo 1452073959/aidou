@@ -106,7 +106,7 @@ $api->version('v1', [
     $api->get('and', 'ListController@and');
 
 
-    $api->get('swoole', 'Dccontroller@activepush');
+    $api->get('swoole', 'Dccontroller@swoolecurl');
 
     //模板消息
     $api->get('subscription', 'UserController@subscription');

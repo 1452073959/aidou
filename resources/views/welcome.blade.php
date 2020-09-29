@@ -13,7 +13,7 @@
 
     var ws; //websocket实例
     var lockReconnect = false; //避免重复连接
-    var wsUrl = 'ws://homestead.work:9600?page=home&token=123456';
+    var wsUrl = 'ws://http://152.136.101.238:9501/';
 
     function initEventHandle() {
         ws.onclose = function() {

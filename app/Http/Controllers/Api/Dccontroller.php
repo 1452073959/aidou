@@ -199,7 +199,7 @@ class Dccontroller extends Controller
     {
 //        dd(123);
          $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, "http://152.136.101.238:9501/");
+        curl_setopt($curl, CURLOPT_URL, "http://152.136.101.238:9501");
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_HEADER, 1);
         curl_setopt($curl, CURLOPT_POST, 1);
@@ -211,6 +211,6 @@ class Dccontroller extends Controller
      public function activepush()
      {
          $param['scene'] = '主动推送消息';
-         $this->swoolecurl($param);            // 主动推送消息
+         return $this->swoolecurl($param);            // 主动推送消息
      }
 }

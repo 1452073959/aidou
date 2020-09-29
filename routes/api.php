@@ -69,9 +69,9 @@ $api->version('v1', [
         //手机号解密
         $api->post('phone', 'Api\Dccontroller@phone');
         //模板消息
-        $api->post('subscription', 'Api\UserController@subscription');
+        $api->get('subscription', 'Api\UserController@subscription');
         //模板消息2
-        $api->post('subscription2', 'Api\UserController@subscription2');
+        $api->get('subscription2', 'Api\UserController@subscription2');
     });
 
     // 登录

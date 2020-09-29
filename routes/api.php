@@ -112,6 +112,8 @@ $api->version('v1', [
     $api->get('subscription', 'UserController@subscription');
     //模板消息2
     $api->get('subscription2', 'UserController@subscription2');
+    //增加票数
+    $api->get('restrank', 'ListController@restrank');
 
 
 

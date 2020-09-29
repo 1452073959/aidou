@@ -287,4 +287,28 @@ class ListController extends Controller
     }
 
 
+        //投票
+    public function restrank(Request $request)
+    {
+        $y = date('Y', time());
+        $m = date('m', time());
+        $d = date('d', time());
+        $w = date('W', time());
+        $user['id']=$request->input('user_id');
+        if ($request->has('celebrity_id') && $request->has('mingci')) {
+            $rank = new Ranking();
+            $rank->celebrity_id = $request->input('celebrity_id');
+            $rank->user_id = $user['id'];
+            $rank->y = $y;
+            $rank->m = $m;
+            $rank->d = $d;
+            $rank->w = $w;
+            $rank->mingci = $request->input('mingci');
+            $rank->save();
+            return $this->success('添加成功');
+        }else{
+            return $this->success('明星id和票数不齐');
+        }
+    }
+
 }

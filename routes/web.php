@@ -12,3 +12,4 @@
 */
 
 Route::redirect('/', '/admin', 301);
+Route::view('/welcome', 'welcome');

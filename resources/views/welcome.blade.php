@@ -1,100 +1,94 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>swoole测试</title>
+    <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"></head>
+<body>
+　　<h1>这是一个测试</h1>
+<button onclick="sendMsg()">点击发送</button>
 
-        <title>Laravel</title>
+</body>
+　　<script>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    var ws; //websocket实例
+    var lockReconnect = false; //避免重复连接
+    var wsUrl = 'ws://homestead.work:9600?page=home&token=123456';
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+    function initEventHandle() {
+        ws.onclose = function() {
+            reconnect(wsUrl);
+        };
+        ws.onerror = function() {
+            reconnect(wsUrl);
+        };
+        ws.onopen = function() {
+            //心跳检测重置
+            heartCheck.reset().start();
+        };
+        ws.onmessage = function(event) {
+            //如果获取到消息，心跳检测重置
+            //拿到任何消息都说明当前连接是正常的
+            var data = JSON.parse(event.data);
+            heartCheck.reset().start();
+        }
+    }
 
-            .full-height {
-                height: 100vh;
-            }
+    createWebSocket(wsUrl);
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+    function sendMsg(){
+        console.log(1111111);
+        ws.send("send by myself");
+    }
+    /**
+     　　　　 * 创建链接
+     　　　　 * @param url
+     　　　　 */
+    function createWebSocket(url) {
+        try {
+            ws = new WebSocket(url);
+            initEventHandle();
+        } catch(e) {
+            reconnect(url);
+        }
+    }
+    function reconnect(url) {
+        if (lockReconnect) return;
+        lockReconnect = true;
+        //没连接上会一直重连，设置延迟避免请求过多
+        setTimeout(function() {
+            createWebSocket(url);
+            lockReconnect = false;
+        },2000);
+    }
+    //心跳检测
+    var heartCheck = {
+        timeout: 60000,
+        //60秒
+        timeoutObj: null,
+        serverTimeoutObj: null,
+        reset: function() {
+            clearTimeout(this.timeoutObj);
+            clearTimeout(this.serverTimeoutObj);
+            return this;
+        },
+        start: function() {
+            var self = this;
+            this.timeoutObj = setTimeout(function() {
+                //这里发送一个心跳，后端收到后，返回一个心跳消息，
+                //onmessage拿到返回的心跳就说明连接正常
+                ws.send("heartbeat");
+                self.serverTimeoutObj = setTimeout(function() { //如果超过一定时间还没重置，说明后端主动断开了
+                    ws.close(); //如果onclose会执行reconnect，我们执行ws.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次
+                },self.timeout);
+            },this.timeout);
+        },
+        header: function(url) {
+            window.location.href = url
+        }
 
-            .position-ref {
-                position: relative;
-            }
+    }
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+</script>
 
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
 </html>

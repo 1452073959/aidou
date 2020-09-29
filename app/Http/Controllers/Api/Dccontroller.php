@@ -195,15 +195,15 @@ class Dccontroller extends Controller
 //        curl_close($curl);
 //    }
 //
-    public function swoolecurl($data)
+    public function swoolecurl($param)
     {
 //        dd(123);
          $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, "https://aidou.hafpay.com:5000/");
+        curl_setopt($curl, CURLOPT_URL, "http://152.136.101.238:9600/");
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_HEADER, 1);
         curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $param);
         curl_exec($curl);
         curl_close($curl);
     }

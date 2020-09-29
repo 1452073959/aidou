@@ -109,9 +109,9 @@ $api->version('v1', [
     $api->get('swoole', 'Dccontroller@activepush');
 
     //模板消息
-    $api->get('subscription', 'Api\UserController@subscription');
+    $api->get('subscription', 'UserController@subscription');
     //模板消息2
-    $api->get('subscription2', 'Api\UserController@subscription2');
+    $api->get('subscription2', 'UserController@subscription2');
 
 
 

@@ -115,7 +115,8 @@ $api->version('v1', [
     //增加票数
     $api->get('restrank', 'ListController@restrank');
 
-
+     //固定广告位id，模版id
+    Route::any('advertisings','Api\ElseController@advertisings');
 
     Route::get('version', function() {
         return 'this is version v1';

@@ -79,6 +79,7 @@ class Swoole extends Command
         $this->ws->on('close',[$this,'close']);
 
         $this->ws->start();
+    
     }
 
     /**
@@ -97,6 +98,10 @@ class Swoole extends Command
      */
     public function message($ws,$frame){
         var_dump('发送成功');
+        $this->info("client is SendMessage4545\n" . $frame);
+             foreach ($ws->connections as $fd) {
+                     $ws->push($fd, $frame->data);
+             }
     }
 
     /**

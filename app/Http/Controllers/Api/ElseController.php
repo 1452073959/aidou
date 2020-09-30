@@ -116,7 +116,61 @@ class ElseController extends Controller
         return $this->success($data);
     }
 
-
+    // 固定广告
+    public function advertisings(Request $request)
+    {
+      $num = $request->input('acid');   
+      if($num==1){
+           $data = [
+             'qid'=>'RdSQCKuMqgJJaVbL_h6uEnpfWp89sP4gq9cgCiskr-A',
+             'did'=>'eF7rzChPMPR1lN6Pqv6Ql7sbZ9fRrtVZMYtcbh6Vkg8',
+             'cvideo'=>'adunit-9a588648b4869e3e',
+             'jvideo'=>'adunit-747c9561d36154bb',
+             'svideo'=>'adunit-74ef8c5e65fa6fa9'
+            ];
+        return $this->success($data);
+      }
+       if($num==2){
+           $data = [
+             'qid'=>'geOTQqUwnFQ6Arl0tTB6JIWPoI_SJmXqKD3W33EYJyc',
+             'did'=>'ZCMFRPTfPz1M9ZWNIpSlbwz7wUHWL6Ub05H6_25l5YM',
+             'cvideo'=>'adunit-aad071cc0398117e',
+             'jvideo'=>'adunit-da654579930d3a20',
+             'svideo'=>'adunit-6c64433e652cff21'
+            ];
+        return $this->success($data);
+      }
+        if($num==3){
+           $data = [
+             'qid'=>'sBEMFxD3H1sI3Le9NT9QBn08PMFTvtfyLKgYXsIeScQ',
+             'did'=>'7TVQHrsldNAKJB-_yWBYBiIX3iLxcmTB-7FHKiuV-wM',
+             'cvideo'=>'adunit-83a0781d2e352c0b',
+             'jvideo'=>'adunit-8140d013bbbbe563',
+             'svideo'=>'adunit-25a994dce4f98013'
+            ];
+        return $this->success($data);
+      }
+        if($num==4){
+           $data = [
+             'qid'=>'psJgJbHDyW5WYZyML2ORdBY-o5Qv4MBt2MCN75KmFwA',
+             'did'=>'OOinQMEGxpKc5NMB4epzs9BGNSgszEWOtfMcA2Z8aEc',
+             'cvideo'=>'adunit-042c8e3730a335da',
+             'jvideo'=>'adunit-d0b3ce854b383055',
+             'svideo'=>'adunit-966243949496c3f2'
+            ];
+        return $this->success($data);
+      }
+        if($num==5){
+           $data = [
+             'qid'=>'sBJspRr9717b2RMHzOAXCcBDxSH1vVDiZvGTeqOaBDw',
+             'did'=>'iDtqotRlIl1YViPSLY95EoPGVwu4kckkMnXl4SKOtpE',
+             'cvideo'=>'adunit-03636795e491b682',
+             'jvideo'=>'adunit-66e098856b3c5aca',
+             'svideo'=>'adunit-26102b939d278b84'
+            ];
+        return $this->success($data);
+      }
+    }
 
 
 }

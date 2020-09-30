@@ -50,7 +50,7 @@ class ListController extends Controller
         $m = request('m', $m);
         $w = request('w', $w);
         if(!$request->has('y')){
-            $where = ['y' => $y, 'm' => $m, 'w' => (string)$w];
+            $where = ['y' => $y,  'w' => (string)$w];
         }
         if($request->has('y')&&$request->has('m')){
             $where = ['y' => $y, 'm' => $m];

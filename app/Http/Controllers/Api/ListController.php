@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\Controller;
 use App\Models\Celebrity;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Ranking;
 use Illuminate\Support\Facades\DB;
@@ -132,10 +133,14 @@ class ListController extends Controller
         }
     }
 
-    public function and()
+    public function and(Request $request)
     {
-        $user = auth('api')->user();
-//        dd($user);
+        if ($request->has('user')) {
+            $user=User::find($request->input('user'));
+        }else{
+            $user = auth('api')->user();
+        }
+        
         $y = date('Y', time());
         $m = date('m', time());
         $d = date('d', time());

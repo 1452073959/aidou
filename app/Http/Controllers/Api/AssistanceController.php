@@ -24,7 +24,7 @@ class AssistanceController extends Controller
     //应援列表
     public function assistancelist()
     {
-        $data=Assistance::with(['project','user'])->where('status',2)->get();
+        $data=Assistance::with(['project','user'])->wherein('status',[2,3,4])->get();
         return $this->success($data);
     }
     //应援详情

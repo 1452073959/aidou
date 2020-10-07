@@ -34,7 +34,7 @@ class AssistanceController extends AdminController
 //            $grid->column('img');
             $grid->column('stocksnum');
             $grid->column('tel');
-            $grid->status->using([ 1 => '不通过',2=>'通过'])->filter(
+            $grid->status->using([ 1 => '不通过',2=>'通过',3=>'已过期',4=>'已完成'])->filter(
                 Grid\Column\Filter\In::make([
                     1 => '不通过',
                     2 => '通过',
@@ -102,7 +102,7 @@ class AssistanceController extends AdminController
             $form->text('stocksnum');
             $form->text('tel');
 //            $form->text('status');
-            $form->radio('status')->options(['1' => '不通过', '2'=> '通过'])->help('不通过状态不显示')->required();
+            $form->radio('status')->options([ 1 => '不通过',2=>'通过',3=>'已过期',4=>'已完成'])->help('不通过状态不显示')->required();
             $form->display('created_at');
             $form->display('updated_at');
         });

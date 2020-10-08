@@ -91,7 +91,7 @@ class ElseController extends Controller
     //banner
     public function banner()
     {
-        $banner = Banner::wherein(['2','1','3','4'])->orderBy('order','desc')->get();
+        $banner = Banner::wherein('status',['2','1','3','4'])->orderBy('order','desc')->get();
         $col=json_decode(Redis::get('cacheKey'));
         $ban['first']=$col['0'];
         $ban['img']=$banner;

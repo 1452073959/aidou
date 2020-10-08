@@ -43,6 +43,10 @@ class AssistanceController extends Controller
     {
         if ($request->has('id')) {
             $data=Assistance::with(['project','user'])->find($request->input('id'));
+            $user = auth('api')->user();
+            if($user){
+                $user->assistance()->attach($data['id']);
+            }
              $time=strtotime($data['endtime']);
              if(time()>$time){
                  $data->status=3;
@@ -54,6 +58,7 @@ class AssistanceController extends Controller
                 $data->save();
                 return $this->success('应援已完成');
             }
+
             $data->stocksnum=$data['stocksnum']+1;
             $data->save();
             return $this->success($data);
@@ -62,15 +67,20 @@ class AssistanceController extends Controller
         }
     }
 
-    //我的应援
+    //我发起的应援
     public function my()
     {
         $user = auth('api')->user();
         $data= Assistance::with(['project','user'])->where('user_id',$user['id'])->get();
         return $this->success($data);
     }
-
-
+    //我参与的应援
+    public function participant(Request $request)
+    {
+        $user = auth('api')->user();
+        $task= $user->assistance()->with(['project','user'])->get();
+        return $this->success($task);
+    }
 
     public function admincate(Request $request)
     {

@@ -51,13 +51,10 @@ $api->version('v1', [
         $api->get('project','Api\ElseController@project');
         //项目发起
         $api->post('assistance','Api\AssistanceController@assistance');
-        //项目列表1待审核2.审核完成
-        $api->get('assistancelist','Api\AssistanceController@assistancelist');
-//        项目详情参数传id
-        $api->get('assistanceshow','Api\AssistanceController@assistanceshow');
-        //参与应援参数传id
-        $api->post('assistanceparticipation','Api\AssistanceController@assistanceparticipation');
-        //我的应援
+        //我参与的应援
+        $api->get('participant','Api\AssistanceController@participant');
+
+        //我发起的应援
         $api->get('myassistance','Api\AssistanceController@my');
         // 我的签到
         $api->get('sign', 'Api\UserController@sign');
@@ -104,8 +101,6 @@ $api->version('v1', [
     //搜索
     $api->get('search', 'ListController@search');
     $api->get('and', 'ListController@and');
-
-
     $api->get('swoole', 'Dccontroller@swoolecurl');
 
     //模板消息
@@ -117,6 +112,13 @@ $api->version('v1', [
 
      //固定广告位id，模版id
     Route::any('advertisings','Api\ElseController@advertisings');
+//应援列表
+    //项目列表1待审核2.审核完成
+    $api->get('assistancelist','AssistanceController@assistancelist');
+    //        项目详情参数传id
+    $api->get('assistanceshow','AssistanceController@assistanceshow');
+    //参与应援参数传id
+    $api->post('assistanceparticipation','AssistanceController@assistanceparticipation');
 
     Route::get('version', function() {
         return 'this is version v1';

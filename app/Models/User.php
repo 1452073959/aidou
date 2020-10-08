@@ -91,7 +91,6 @@ class User extends Authenticatable implements JWTSubject
     public function task()
     {
         return $this->belongsToMany(Task::class, 'users_task')->withPivot(['status','sum'])->withTimestamps();
-
     }
     public function participation()
     {
@@ -103,6 +102,12 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Qunmass::class);
     }
 
+    //我参与的集结
+
+    public function assistance()
+    {
+        return $this->belongsToMany(Assistance::class, 'users_assistance')->withTimestamps();
+    }
 
 
 

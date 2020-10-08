@@ -65,8 +65,9 @@ class BannerController extends AdminController
             $form->image('img')->uniqueName();;
             $form->text('url');
             $form->radio('status','类型')->options([
-                1 => '图文', 2 => '跳转小程序',3=>'榜单明星',4=>'其他'
+                1 => '图文', 2 => '跳转小程序',3=>'榜单明星',4=>'其他',5=>'隐藏'
             ])->required();
+            $form->number('order', '排序')->help('数字越大越靠前')->required();
             $form->disableResetButton();
             $form->disableViewCheck();
             $form->disableEditingCheck();

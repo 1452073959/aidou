@@ -90,7 +90,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function task()
     {
-        return $this->belongsToMany(Task::class, 'users_task')->withPivot(['status','sum'])->withTimestamps();
+        return $this->belongsToMany(Task::class, 'users_task')->withPivot(['status','sum'])->orderBy('order','desc')->withTimestamps();
     }
     public function participation()
     {

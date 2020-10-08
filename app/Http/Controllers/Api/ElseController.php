@@ -93,8 +93,9 @@ class ElseController extends Controller
     {
         $banner = Banner::all();
         $col=json_decode(Redis::get('cacheKey'));
-        $banner['first']=$col['0'];
-        return $this->success($banner);
+        $ban['first']=$col['0'];
+        $ban['img']=$banner;
+        return $this->success($ban);
     }
 
     //公告

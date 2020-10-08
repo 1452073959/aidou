@@ -63,7 +63,7 @@ class BannerController extends AdminController
         return Form::make(new Banner(), function (Form $form) {
             $form->display('id');
             $form->image('img')->uniqueName();;
-            $form->url('url');
+            $form->text('url');
             $form->radio('status','类型')->options([
                 1 => '图文', 2 => '跳转小程序',3=>'榜单明星',4=>'其他'
             ])->required();

@@ -78,8 +78,7 @@ class UserController extends AdminController
             $form->display('id');
             $form->text('nickname');
             $form->text('weapp_avatar');
-            $form->text('weapp_openid');
-            $form->text('defaultaddress_id');
+            $form->image('weapp_openid');
             $form->text('diamondnum');
             $form->text('votenum');
             $form->text('box');

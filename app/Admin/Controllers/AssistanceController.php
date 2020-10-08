@@ -92,7 +92,7 @@ class AssistanceController extends AdminController
     {
         return Form::make(new Assistance(['user']), function (Form $form) {
             $form->display('id');
-//            $form->text('user_id');
+            $form->text('user_id')->help('后台发起应援填写一个用户');
             $form->text('name');
             $form->text('star');
 //            $form->text('xid');

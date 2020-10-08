@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 use App\Models\Ranking;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
-
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 class ListController extends Controller
 {
     //获取有哪些月份
@@ -140,7 +141,7 @@ class ListController extends Controller
         }else{
             $user = auth('api')->user();
         }
-        
+
         $y = date('Y', time());
         $m = date('m', time());
         $d = date('d', time());
@@ -185,17 +186,37 @@ class ListController extends Controller
 //        $w=request('w', $w);
         $where = ['y' => $y, 'm' => $m,];
         if ($request->has('celebrity_id')) {
-            $rank = Ranking::with('user')->where($where)->where('celebrity_id', $request->input('celebrity_id'))->groupBy('user_id')->paginate(10);
-//            dd($rank->toarray());
+            $rank = Ranking::with('user')->where($where)->where('celebrity_id', $request->input('celebrity_id'))->groupBy('user_id')->get();
+
             foreach ($rank as $k => $v) {
                 $rank[$k]['num']=array_sum( DB::table('ranking')->where($where)->where('user_id',$v['user_id'])->where('celebrity_id', $request->input('celebrity_id'))->pluck('mingci')->toArray());
             }
+//            dd($rank->toarray());
             $rank=$rank->toarray();
+
             $newArr=array();
-            for($j=0;$j<count($rank['data']);$j++){
-                $newArr[]=$rank['data'][$j]['num'];
+            for($j=0;$j<count($rank);$j++){
+                $newArr[]=$rank[$j]['num'];
 }
-            array_multisort($newArr,SORT_DESC,$rank['data']);
+            array_multisort($newArr,SORT_DESC,$rank);
+            // Get current page form url e.x. &page=1
+            $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
+            // Create a new Laravel collection from the array data
+            $itemCollection = collect($rank);
+
+            // Define how many items we want to be visible in each page
+            $perPage = 10;
+
+            // Slice the collection to get the items to display in current page
+            $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+
+            // Create our paginator and pass it to the view
+            $paginatedItems= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+
+            // set url path for generted links
+            $paginatedItems->setPath($request->url());
+            return $this->success($paginatedItems);
 
         } else {
             $cel=Celebrity::all();
@@ -221,7 +242,6 @@ class ListController extends Controller
             array_multisort($fir,SORT_DESC,$col);
             return $this->success($col);
         }
-
 
         return $this->success($rank);
     }

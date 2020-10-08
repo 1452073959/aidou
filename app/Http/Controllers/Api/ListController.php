@@ -199,24 +199,17 @@ class ListController extends Controller
                 $newArr[]=$rank[$j]['num'];
 }
             array_multisort($newArr,SORT_DESC,$rank);
-            // Get current page form url e.x. &page=1
-            $currentPage = LengthAwarePaginator::resolveCurrentPage();
-
-            // Create a new Laravel collection from the array data
-            $itemCollection = collect($rank);
-
-            // Define how many items we want to be visible in each page
-            $perPage = 10;
-
-            // Slice the collection to get the items to display in current page
-            $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
-
-            // Create our paginator and pass it to the view
-            $paginatedItems= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
-
-            // set url path for generted links
-            $paginatedItems->setPath($request->url());
-            return $this->success($paginatedItems);
+//            dd($rank);
+            //当前页数 默认1
+            $page = $request->page ?: 1;
+            //每页的条数
+            $perPage = 2;
+            //计算每页分页的初始位置
+            $offset = ($page * $perPage) - $perPage;
+            //实例化LengthAwarePaginator类，并传入对应的参数
+            $data = new LengthAwarePaginator(array_slice($rank, $offset, $perPage, false), count($rank), $perPage,
+                $page, ['path' => $request->url(), 'query' => $request->query()]);
+            return $this->success($data);
 
         } else {
           if(Redis::exists('cacheKey'))

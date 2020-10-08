@@ -103,6 +103,8 @@ class MassController extends Controller
                 }
                 return $this->success('参与成功');
             }
+        }else{
+            return $this->success('该集结已失效');
         }
 
     }

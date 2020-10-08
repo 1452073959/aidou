@@ -77,8 +77,8 @@ class UserController extends AdminController
         return Form::make(new User(), function (Form $form) {
             $form->display('id');
             $form->text('nickname');
-            $form->text('weapp_avatar');
-            $form->image('weapp_openid');
+            $form->image('weapp_avatar');
+            $form->text('weapp_openid');
             $form->text('diamondnum');
             $form->text('votenum');
             $form->text('box');

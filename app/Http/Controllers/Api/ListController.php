@@ -203,7 +203,7 @@ class ListController extends Controller
             //当前页数 默认1
             $page = $request->page ?: 1;
             //每页的条数
-            $perPage = 2;
+            $perPage = 10;
             //计算每页分页的初始位置
             $offset = ($page * $perPage) - $perPage;
             //实例化LengthAwarePaginator类，并传入对应的参数

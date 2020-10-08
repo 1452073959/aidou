@@ -10,7 +10,7 @@ use App\Models\Project;
 use App\Models\Ranking;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Redis;
 class ElseController extends Controller
 {
     //
@@ -92,6 +92,8 @@ class ElseController extends Controller
     public function banner()
     {
         $banner = Banner::all();
+        $col=json_decode(Redis::get('cacheKey'));
+        $banner['first']=$col['0'];
         return $this->success($banner);
     }
 

@@ -219,31 +219,36 @@ class ListController extends Controller
             return $this->success($paginatedItems);
 
         } else {
-            $cel=Celebrity::all();
-            $col=[];
-            foreach ($cel as $key=>$val){
-                $rank = Ranking::with('user','celebrity')->where($where)->where('celebrity_id', $val['id'])->groupBy('user_id')->paginate(10);
-                foreach ($rank as $k =>$v) {
-                    $rank[$k]['num']=array_sum( DB::table('ranking')->where($where)->where('user_id',$v['user_id'])->where('celebrity_id', $val['id'])->pluck('mingci')->toArray());
-                }
-//                dump( $val['id']);
-                $rank=$rank->toarray();
-                $newArr=array();
-                for($j=0;$j<count($rank['data']);$j++){
-                    $newArr[]=$rank['data'][$j]['num'];
-                }
-                array_multisort($newArr,SORT_DESC,$rank['data']);
-                $col[]=$rank['data']['0'];
-            }
-            $fir=array();
-            for($j=0;$j<count($col);$j++){
-                $fir[]=$col[$j]['num'];
-            }
-            array_multisort($fir,SORT_DESC,$col);
+          if(Redis::exists('cacheKey'))
+          {
+              $col=json_decode(Redis::get('cacheKey'));
+          }else{
+              $cel=Celebrity::all();
+              $col=[];
+              foreach ($cel as $key=>$val){
+                  $rank = Ranking::with('user','celebrity')->where($where)->where('celebrity_id', $val['id'])->groupBy('user_id')->get();
+                  foreach ($rank as $k =>$v) {
+                      $rank[$k]['num']=array_sum( DB::table('ranking')->where($where)->where('user_id',$v['user_id'])->where('celebrity_id', $val['id'])->pluck('mingci')->toArray());
+                  }
+                  $rank=$rank->toarray();
+                  $newArr=array();
+                  for($j=0;$j<count($rank);$j++){
+                      $newArr[]=$rank[$j]['num'];
+                  }
+                  array_multisort($newArr,SORT_DESC,$rank);
+                  $col[]=$rank['0'];
+              }
+              $fir=array();
+              for($j=0;$j<count($col);$j++){
+                  $fir[]=$col[$j]['num'];
+              }
+              array_multisort($fir,SORT_DESC,$col);
+              $col=json_encode($col);
+              Redis::setex('cacheKey', 1800, $col);
+              $col=json_decode(Redis::get('cacheKey'));
+          }
             return $this->success($col);
         }
-
-        return $this->success($rank);
     }
 
     //本人投过的

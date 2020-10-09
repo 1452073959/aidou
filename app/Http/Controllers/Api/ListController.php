@@ -256,8 +256,8 @@ class ListController extends Controller
         $w = request('w', $w);
         $user = auth('api')->user();
 
-        $where = ['y' => $y, 'm' => $m, 'w' => (string)$w, 'user_id' => $user['id']];
-        $rank = Ranking::with('celebrity')->where($where)->get();
+        $where = ['y' => $y, 'w' => (string)$w, 'user_id' => $user['id']];
+        $rank = Ranking::with('celebrity')->where($where)->orderBy('id','desc')->get();
         $genre = $rank->groupBy('celebrity_id');
         foreach ($genre as $k => $v) {
             $sum = 0;
@@ -266,7 +266,7 @@ class ListController extends Controller
                 Redis::zadd($user['id'], $sum, $v2['celebrity']);
             }
         }
-        $data = Redis::zrevrange('zset1', 0, 1, 'withscores');//返回有序集合的所有值
+        $data = Redis::zrevrange($user['id'], 0, 1, 'withscores');//返回有序集合的所有值
         $a = [];
         foreach ($data as $k => $v) {
             $a[$k]['star'] = json_decode($k, true);

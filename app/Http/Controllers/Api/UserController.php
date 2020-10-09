@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 class UserController extends Controller
 {
     //获取用户信息
@@ -110,6 +111,20 @@ class UserController extends Controller
     public function subscription()
     {
         $app = \EasyWeChat::miniProgram();
+
+        $data = Redis::zrevrange('zset1', 0, 2);//返回有序集合的所有值
+        $name=array();
+        foreach ($data as $k => $v) {
+            $name[] = json_decode($v, true);
+        }
+        $star=[];
+        foreach ($name as $k=>$v )
+        {
+            $star[]=$v['name'];
+
+        }
+        $star=   implode(",", $star);
+
        $moban= $app->subscribe_message->getTemplates();
         $alluser=User::all();
        foreach ($alluser as $k=>$v){
@@ -122,7 +137,7 @@ class UserController extends Controller
                        'value'=>'每日签到开始啦!'
                    ],
                    'thing2' => [
-                       'value'=>'连续7天签到有奖励哦~'
+                       'value'=>$star.'位居前三'
                    ],
                ],
            ];
@@ -138,8 +153,24 @@ class UserController extends Controller
     {
         $app = \EasyWeChat::miniProgram();
         $moban= $app->subscribe_message->getTemplates();
+
+
         $alluser=User::all();
         foreach ($alluser as $k=>$v){
+//            dump($alluser->toArray());
+            if(Redis::exists($v['id'])){
+                $data = Redis::zrevrange($v['id'], 0,0, 'withscores');
+            }else{
+                $data = Redis::zrevrange('zset1', 0, 0,'withscores');
+            }
+            $a = [];
+            foreach ($data as $k => $v) {
+                $a[$k]['star'] = json_decode($k, true);
+                $a[$k]['star'] =   $a[$k]['star']['name'];
+                $a[$k]['num'] = $v;
+            }
+            $a = array_values($a);
+            $star= implode("当前", $a['0']);
         $data = [
             'template_id' => 'eF7rzChPMPR1lN6Pqv6Ql7sbZ9fRrtVZMYtcbh6Vkg8', // 所需下发的订阅模板id
             'touser' =>$v['weapp_openid'],     // 接收者（用户）的 openid
@@ -152,7 +183,7 @@ class UserController extends Controller
                     'value'=>date('y-m-d h:i:s',time())
                 ],
                 'thing6' => [
-                    'value'=>'周榜进行中~'
+                    'value'=>$star
                 ],
             ],
         ];

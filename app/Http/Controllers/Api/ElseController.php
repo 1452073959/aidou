@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Api\Controller;
 use App\Models\Banner;
 use App\Models\Bulletin;
+use App\Models\Complaint;
 use App\Models\Lottery;
 use App\Models\Project;
 use App\Models\Ranking;
+use App\Models\Settings;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
@@ -174,6 +176,21 @@ class ElseController extends Controller
         return $this->success($data);
       }
     }
-
+//投诉
+    public function complaint(Request $request)
+    {
+        $data=$request->all();
+        $five=new Complaint();
+        $five->tel=$data['tel'];
+        $five->content=$data['content'];
+        $five->save();
+        return $this->success($five);
+    }
+    //其他设置
+    public function  setting()
+    {
+        $data=Settings::first();
+        return $this->success($data);
+    }
 
 }

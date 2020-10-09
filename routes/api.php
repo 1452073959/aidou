@@ -119,7 +119,11 @@ $api->version('v1', [
     $api->get('assistanceshow','AssistanceController@assistanceshow');
     //参与应援参数传id
     $api->post('assistanceparticipation','AssistanceController@assistanceparticipation');
-
+    //最近五条群集结任务
+    $api->get('massfive','MassController@five');
+    //设置(背景图
+    $api->get('setting','ElseController@setting');
+//测试路由
     Route::get('version', function() {
         return 'this is version v1';
     })->name('version');

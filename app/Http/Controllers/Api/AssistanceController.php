@@ -45,7 +45,11 @@ class AssistanceController extends Controller
             $data=Assistance::with(['project','user'])->find($request->input('id'));
             $user = auth('api')->user();
             if($user){
-                $user->assistance()->attach($data['id']);
+                if($data['user_id']==$user['id']){
+                    return $this->success('应援发起人不能参与哦');
+                }else{
+                    $user->assistance()->attach($data['id']);
+                }
             }
              $time=strtotime($data['endtime']);
              if(time()>$time){

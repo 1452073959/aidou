@@ -56,6 +56,7 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection text
      * @property Grid\Column|Collection backimage
      * @property Grid\Column|Collection influencenum
+     * @property Grid\Column|Collection content
      * @property Grid\Column|Collection speed_id
      * @property Grid\Column|Collection last_time
      * @property Grid\Column|Collection collect
@@ -100,13 +101,15 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection nickname
      * @property Grid\Column|Collection weapp_avatar
      * @property Grid\Column|Collection weapp_openid
-     * @property Grid\Column|Collection defaultaddress_id
+     * @property Grid\Column|Collection phone
      * @property Grid\Column|Collection diamondnum
      * @property Grid\Column|Collection votenum
+     * @property Grid\Column|Collection boxtwo
      * @property Grid\Column|Collection box
      * @property Grid\Column|Collection drawamount
      * @property Grid\Column|Collection sign_time
      * @property Grid\Column|Collection sign_num
+     * @property Grid\Column|Collection assistance_id
      * @property Grid\Column|Collection task_id
      *
      * @method Grid\Column|Collection name(string $label = null)
@@ -154,6 +157,7 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection text(string $label = null)
      * @method Grid\Column|Collection backimage(string $label = null)
      * @method Grid\Column|Collection influencenum(string $label = null)
+     * @method Grid\Column|Collection content(string $label = null)
      * @method Grid\Column|Collection speed_id(string $label = null)
      * @method Grid\Column|Collection last_time(string $label = null)
      * @method Grid\Column|Collection collect(string $label = null)
@@ -198,13 +202,15 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection nickname(string $label = null)
      * @method Grid\Column|Collection weapp_avatar(string $label = null)
      * @method Grid\Column|Collection weapp_openid(string $label = null)
-     * @method Grid\Column|Collection defaultaddress_id(string $label = null)
+     * @method Grid\Column|Collection phone(string $label = null)
      * @method Grid\Column|Collection diamondnum(string $label = null)
      * @method Grid\Column|Collection votenum(string $label = null)
+     * @method Grid\Column|Collection boxtwo(string $label = null)
      * @method Grid\Column|Collection box(string $label = null)
      * @method Grid\Column|Collection drawamount(string $label = null)
      * @method Grid\Column|Collection sign_time(string $label = null)
      * @method Grid\Column|Collection sign_num(string $label = null)
+     * @method Grid\Column|Collection assistance_id(string $label = null)
      * @method Grid\Column|Collection task_id(string $label = null)
      */
     class Grid {}
@@ -257,6 +263,7 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection text
      * @property Show\Field|Collection backimage
      * @property Show\Field|Collection influencenum
+     * @property Show\Field|Collection content
      * @property Show\Field|Collection speed_id
      * @property Show\Field|Collection last_time
      * @property Show\Field|Collection collect
@@ -301,13 +308,15 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection nickname
      * @property Show\Field|Collection weapp_avatar
      * @property Show\Field|Collection weapp_openid
-     * @property Show\Field|Collection defaultaddress_id
+     * @property Show\Field|Collection phone
      * @property Show\Field|Collection diamondnum
      * @property Show\Field|Collection votenum
+     * @property Show\Field|Collection boxtwo
      * @property Show\Field|Collection box
      * @property Show\Field|Collection drawamount
      * @property Show\Field|Collection sign_time
      * @property Show\Field|Collection sign_num
+     * @property Show\Field|Collection assistance_id
      * @property Show\Field|Collection task_id
      *
      * @method Show\Field|Collection name(string $label = null)
@@ -355,6 +364,7 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection text(string $label = null)
      * @method Show\Field|Collection backimage(string $label = null)
      * @method Show\Field|Collection influencenum(string $label = null)
+     * @method Show\Field|Collection content(string $label = null)
      * @method Show\Field|Collection speed_id(string $label = null)
      * @method Show\Field|Collection last_time(string $label = null)
      * @method Show\Field|Collection collect(string $label = null)
@@ -399,13 +409,15 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection nickname(string $label = null)
      * @method Show\Field|Collection weapp_avatar(string $label = null)
      * @method Show\Field|Collection weapp_openid(string $label = null)
-     * @method Show\Field|Collection defaultaddress_id(string $label = null)
+     * @method Show\Field|Collection phone(string $label = null)
      * @method Show\Field|Collection diamondnum(string $label = null)
      * @method Show\Field|Collection votenum(string $label = null)
+     * @method Show\Field|Collection boxtwo(string $label = null)
      * @method Show\Field|Collection box(string $label = null)
      * @method Show\Field|Collection drawamount(string $label = null)
      * @method Show\Field|Collection sign_time(string $label = null)
      * @method Show\Field|Collection sign_num(string $label = null)
+     * @method Show\Field|Collection assistance_id(string $label = null)
      * @method Show\Field|Collection task_id(string $label = null)
      */
     class Show {}

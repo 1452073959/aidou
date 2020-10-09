@@ -29,7 +29,6 @@ class AssistanceController extends AdminController
             $grid->model()->with(['project']);
             $grid->column('project.text', '项目');
 //            $grid->model()->with(['project.name']);
-            $grid->column('xid');
             $grid->column('endtime');
 //            $grid->column('img');
             $grid->column('stocksnum');

@@ -34,4 +34,7 @@ Route::group([
     //项目
     $router->resource('project', 'ProjectController');
 
+    //投诉
+    $router->resource('complaint', 'ComplaintController');
+
 });//

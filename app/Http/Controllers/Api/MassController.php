@@ -16,25 +16,25 @@ class MassController extends Controller
         $user = auth('api')->user();
 //            dd($user);
         if ($request->has('celebrity_id')) {
-            $participation=  $user->qunmass()->where('celebrity_id',$request->input('celebrity_id'))->first();
-            if($participation){
-                if($participation['del_time']<time()){
-                    Qunmass::destroy( $request->input('qunmass_id'));
+            $participation = $user->qunmass()->where('celebrity_id', $request->input('celebrity_id'))->first();
+            if ($participation) {
+                if ($participation['del_time'] < time()) {
+                    Qunmass::destroy($request->input('qunmass_id'));
                     $cart = new Qunmass();
                     $cart->user()->associate($user);
                     $cart->celbrity()->associate($request->input('celebrity_id'));
-                    $cart->end_time = time() + (3600*3);
+                    $cart->end_time = time() + (3600 * 3);
                     $cart->del_time = time() + (3600 * 5);
                     $cart->save();
                     return $this->success($cart);
-                }else{
+                } else {
                     return $this->success($participation);
                 }
-            }else{
+            } else {
                 $cart = new Qunmass();
                 $cart->user()->associate($user);
                 $cart->celbrity()->associate($request->input('celebrity_id'));
-                $cart->end_time = time() + (3600*3);
+                $cart->end_time = time() + (3600 * 3);
                 $cart->del_time = time() + (3600 * 5);
                 $cart->save();
                 return $this->success($cart);
@@ -54,16 +54,16 @@ class MassController extends Controller
             if ($participation) {
                 return $this->success('该集结您已参与过');
             } else {
-                $participation=Qunmass::find( $request->input('qunmass_id'));
-                if(!$participation){
+                $participation = Qunmass::find($request->input('qunmass_id'));
+                if (!$participation) {
                     return $this->success('该集结已失效');
                 };
-                if($user['id']==$participation['user_id']){
+                if ($user['id'] == $participation['user_id']) {
                     return $this->success('发起人已经默认参与哟!');
                 }
 
 //                dump($participation);
-                if($participation['end_time']<time()){
+                if ($participation['end_time'] < time()) {
                     return $this->success('该集结已过期');
                 }
                 $user->participation()->create([
@@ -103,7 +103,7 @@ class MassController extends Controller
                 }
                 return $this->success('参与成功');
             }
-        }else{
+        } else {
             return $this->success('该集结已失效');
         }
 
@@ -119,5 +119,13 @@ class MassController extends Controller
         $participant = Qunman::with('user')->where('qunmass_id', $qunmass_id)->get();
 
         return $this->success(['initiator' => $initiator, 'participant' => $participant]);
+    }
+
+    //最近的五条集结
+    public function five()
+    {
+        $five = Qunmass::with('user')->orderby('created_at', 'desc')->take(5)->get();
+
+        return $this->success($five);
     }
 }

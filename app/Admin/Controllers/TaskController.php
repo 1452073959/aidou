@@ -19,6 +19,7 @@ class TaskController extends AdminController
     {
         return Grid::make(new Task(), function (Grid $grid) {
             $grid->column('id')->sortable();
+            $grid->column('order','排序/权重')->sortable();
             $grid->column('title');
             $grid->column('award');
             $grid->column('num');

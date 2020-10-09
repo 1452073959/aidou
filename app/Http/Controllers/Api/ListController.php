@@ -266,7 +266,7 @@ class ListController extends Controller
                 Redis::zadd($user['id'], $sum, $v2['celebrity']);
             }
         }
-        $data = Redis::zrevrange($user['id'], 0, 1, 'withscores');//返回有序集合的所有值
+        $data = Redis::zrevrange('zset1', 0, 1, 'withscores');//返回有序集合的所有值
         $a = [];
         foreach ($data as $k => $v) {
             $a[$k]['star'] = json_decode($k, true);

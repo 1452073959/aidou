@@ -123,6 +123,8 @@ $api->version('v1', [
     $api->get('massfive','MassController@five');
     //设置(背景图
     $api->get('setting','ElseController@setting');
+    //投诉接口
+    $api->post('complaint','ElseController@complaint');
 //测试路由
     Route::get('version', function() {
         return 'this is version v1';

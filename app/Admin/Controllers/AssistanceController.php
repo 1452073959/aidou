@@ -89,9 +89,9 @@ class AssistanceController extends AdminController
      */
     protected function form()
     {
-        return Form::make(new Assistance(['user']), function (Form $form) {
+        return Form::make(new Assistance(), function (Form $form) {
             $form->display('id');
-            $form->text('user_id')->help('后台发起应援填写一个用户');
+            $form->text('user_id','用户id')->help('后台发起应援填写一个用户');
             $form->text('name');
             $form->text('star');
 //            $form->text('xid');
@@ -102,6 +102,7 @@ class AssistanceController extends AdminController
             $form->text('tel');
 //            $form->text('status');
             $form->radio('status')->options([ 1 => '不通过',2=>'通过',3=>'已过期',4=>'已完成'])->help('不通过状态不显示')->required();
+
             $form->display('created_at');
             $form->display('updated_at');
         });

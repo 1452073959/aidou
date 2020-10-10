@@ -12,6 +12,7 @@ use App\Models\Ranking;
 use App\Models\Settings;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 class ElseController extends Controller
 {
@@ -94,7 +95,7 @@ class ElseController extends Controller
     public function banner()
     {
         $banner = Banner::wherein('status',['2','1','3','4'])->orderBy('order','desc')->get();
-        $col=json_decode(Redis::get('cacheKey'));
+        $col=json_decode(Cache::get('cacheKey'));
         $ban['first']=$col['0'];
         $ban['img']=$banner;
         return $this->success($ban);

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Cache;
 class ListController extends Controller
 {
     //获取有哪些月份
@@ -212,10 +213,11 @@ class ListController extends Controller
             return $this->success($data);
 
         } else {
-          if(Redis::exists('cacheKey'))
+
+            if (Cache::has('cacheKey'))
           {
-              $col=json_decode(Redis::get('cacheKey'));
-          }else{
+              $col=json_decode(Cache::get('cacheKey'));
+            }else{
               $cel=Celebrity::all();
               $col=[];
               foreach ($cel as $key=>$val){
@@ -237,8 +239,9 @@ class ListController extends Controller
               }
               array_multisort($fir,SORT_DESC,$col);
               $col=json_encode($col);
-              Redis::setex('cacheKey', 1800, $col);
-              $col=json_decode(Redis::get('cacheKey'));
+              Cache::put('cacheKey', $col, 1800);
+              $col=json_decode(Cache::get('cacheKey'));
+
           }
             return $this->success($col);
         }

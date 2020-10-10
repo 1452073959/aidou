@@ -237,7 +237,7 @@ class ListController extends Controller
               }
               array_multisort($fir,SORT_DESC,$col);
               $col=json_encode($col);
-              Redis::set('cacheKey', 1800, $col);
+              Redis::setex('cacheKey', 1800, $col);
               $col=json_decode(Redis::get('cacheKey'));
           }
             return $this->success($col);

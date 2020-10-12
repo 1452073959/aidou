@@ -38,6 +38,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             $b=Task::where('type',1)->pluck('id');
             DB::table('users_task')->whereIn('task_id',$b)->update(['status'=>1,'sum'=>0]);
+            DB::table('users')->update(['votenum'=>0]);
         })->weeklyOn(1, '8:00');
     }
 

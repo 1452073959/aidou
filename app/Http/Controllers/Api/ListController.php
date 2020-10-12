@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Redis;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Cache;
+
 class ListController extends Controller
 {
     //获取有哪些月份
@@ -52,13 +53,13 @@ class ListController extends Controller
         $y = request('y', $y);
         $m = request('m', $m);
         $w = request('w', $w);
-        if(!$request->has('y')){
-            $where = ['y' => $y,  'w' => (string)$w];
+        if (!$request->has('y')) {
+            $where = ['y' => $y, 'w' => (string)$w];
         }
-        if($request->has('y')&&$request->has('m')){
+        if ($request->has('y') && $request->has('m')) {
             $where = ['y' => $y, 'm' => $m];
         }
-        if($request->has('y')&&$request->has('w')){
+        if ($request->has('y') && $request->has('w')) {
             $where = ['y' => $y, 'w' => (string)$w];
         }
 
@@ -121,13 +122,13 @@ class ListController extends Controller
             $rank->m = $m;
             $rank->d = $d;
             $rank->w = $w;
-            if($request->has('double')){
-                $rank->mingci = $request->input('mingci')*2;
-            }else{
+            if ($request->has('double')) {
+                $rank->mingci = $request->input('mingci') * 2;
+            } else {
                 $rank->mingci = $request->input('mingci');
             }
             $rank->save();
-            $user->votenum=$user['votenum']- ($request->input('mingci'));
+            $user->votenum = $user['votenum'] - ($request->input('mingci'));
             $user->save();
             return $this->success($rank);
         } else {
@@ -138,8 +139,8 @@ class ListController extends Controller
     public function and(Request $request)
     {
         if ($request->has('user')) {
-            $user=User::find($request->input('user'));
-        }else{
+            $user = User::find($request->input('user'));
+        } else {
             $user = auth('api')->user();
         }
 
@@ -147,11 +148,10 @@ class ListController extends Controller
         $m = date('m', time());
         $d = date('d', time());
         $w = date('W', time());
-        $m1=Celebrity::all();
-        foreach ($m1 as $k=>$v)
-        {
+        $m1 = Celebrity::all();
+        foreach ($m1 as $k => $v) {
             $rank = new Ranking();
-            $rank->celebrity_id =$v['id'];
+            $rank->celebrity_id = $v['id'];
             $rank->user_id = $user['id'];
             $rank->y = $y;
             $rank->m = $m;
@@ -167,10 +167,31 @@ class ListController extends Controller
     //明星排名/影响力
     public function celeberrank(Request $request)
     {
+
+        $num = request('num', -1);
+        $y = date('Y', time());
+        $m = date('m', time());
+        $w = date('W', time());
+        $y = request('y', $y);
+        $m = request('m', $m);
+        $w = request('w', $w);
+        $where = [];
+        $where = ['y' => $y, 'm' => $m];
+//        $where = ['y' => $y, 'w' => (string)$w];
+        $rank = Ranking::with('celebrity')->where($where)->get();
+        $genre = $rank->groupBy('celebrity_id');
+        foreach ($genre as $k => $v) {
+            $sum = 0;
+            foreach ($v as $k1 => $v2) {
+                $sum += (int)$v2['mingci'];
+                Redis::zadd('zset2', $sum, $v2['celebrity']);
+            }
+        }
+
         $celebr = Celebrity::find($request->input('celebrity_id'));
-        $order = Redis::zrevrank ('zset1', $celebr);
-        $b = Redis::zscore('zset1', $celebr);
-        return $this->success(['user' => $celebr, 'order' => $order+1, 'sum' => $b]);
+        $order = Redis::zrevrank('zset2', $celebr);
+        $b = Redis::zscore('zset2', $celebr);
+        return $this->success(['user' => $celebr, 'order' => $order + 1, 'sum' => $b]);
 
     }
 
@@ -190,16 +211,16 @@ class ListController extends Controller
             $rank = Ranking::with('user')->where($where)->where('celebrity_id', $request->input('celebrity_id'))->groupBy('user_id')->get();
 
             foreach ($rank as $k => $v) {
-                $rank[$k]['num']=array_sum( DB::table('ranking')->where($where)->where('user_id',$v['user_id'])->where('celebrity_id', $request->input('celebrity_id'))->pluck('mingci')->toArray());
+                $rank[$k]['num'] = array_sum(DB::table('ranking')->where($where)->where('user_id', $v['user_id'])->where('celebrity_id', $request->input('celebrity_id'))->pluck('mingci')->toArray());
             }
 //            dd($rank->toarray());
-            $rank=$rank->toarray();
+            $rank = $rank->toarray();
 
-            $newArr=array();
-            for($j=0;$j<count($rank);$j++){
-                $newArr[]=$rank[$j]['num'];
-}
-            array_multisort($newArr,SORT_DESC,$rank);
+            $newArr = array();
+            for ($j = 0; $j < count($rank); $j++) {
+                $newArr[] = $rank[$j]['num'];
+            }
+            array_multisort($newArr, SORT_DESC, $rank);
 //            dd($rank);
             //当前页数 默认1
             $page = $request->page ?: 1;
@@ -214,35 +235,34 @@ class ListController extends Controller
 
         } else {
 
-            if (Cache::has('cacheKey'))
-          {
-              $col=json_decode(Cache::get('cacheKey'));
-            }else{
-              $cel=Celebrity::all();
-              $col=[];
-              foreach ($cel as $key=>$val){
-                  $rank = Ranking::with('user','celebrity')->where($where)->where('celebrity_id', $val['id'])->groupBy('user_id')->get();
-                  foreach ($rank as $k =>$v) {
-                      $rank[$k]['num']=array_sum( DB::table('ranking')->where($where)->where('user_id',$v['user_id'])->where('celebrity_id', $val['id'])->pluck('mingci')->toArray());
-                  }
-                  $rank=$rank->toarray();
-                  $newArr=array();
-                  for($j=0;$j<count($rank);$j++){
-                      $newArr[]=$rank[$j]['num'];
-                  }
-                  array_multisort($newArr,SORT_DESC,$rank);
-                  $col[]=$rank['0'];
-              }
-              $fir=array();
-              for($j=0;$j<count($col);$j++){
-                  $fir[]=$col[$j]['num'];
-              }
-              array_multisort($fir,SORT_DESC,$col);
-              $col=json_encode($col);
-              Cache::put('cacheKey', $col, 1800);
-              $col=json_decode(Cache::get('cacheKey'));
+            if (Cache::has('cacheKey')) {
+                $col = json_decode(Cache::get('cacheKey'));
+            } else {
+                $cel = Celebrity::all();
+                $col = [];
+                foreach ($cel as $key => $val) {
+                    $rank = Ranking::with('user', 'celebrity')->where($where)->where('celebrity_id', $val['id'])->groupBy('user_id')->get();
+                    foreach ($rank as $k => $v) {
+                        $rank[$k]['num'] = array_sum(DB::table('ranking')->where($where)->where('user_id', $v['user_id'])->where('celebrity_id', $val['id'])->pluck('mingci')->toArray());
+                    }
+                    $rank = $rank->toarray();
+                    $newArr = array();
+                    for ($j = 0; $j < count($rank); $j++) {
+                        $newArr[] = $rank[$j]['num'];
+                    }
+                    array_multisort($newArr, SORT_DESC, $rank);
+                    $col[] = $rank['0'];
+                }
+                $fir = array();
+                for ($j = 0; $j < count($col); $j++) {
+                    $fir[] = $col[$j]['num'];
+                }
+                array_multisort($fir, SORT_DESC, $col);
+                $col = json_encode($col);
+                Cache::put('cacheKey', $col, 1800);
+                $col = json_decode(Cache::get('cacheKey'));
 
-          }
+            }
             return $this->success($col);
         }
     }
@@ -260,7 +280,7 @@ class ListController extends Controller
         $user = auth('api')->user();
 
         $where = ['y' => $y, 'w' => (string)$w, 'user_id' => $user['id']];
-        $rank = Ranking::with('celebrity')->where($where)->orderBy('id','desc')->get();
+        $rank = Ranking::with('celebrity')->where($where)->orderBy('id', 'desc')->get();
         $genre = $rank->groupBy('celebrity_id');
         foreach ($genre as $k => $v) {
             $sum = 0;
@@ -297,30 +317,29 @@ class ListController extends Controller
         $builder = Celebrity::query();
         // 判断是否有提交 search 参数，如果有就赋值给 $search 变量
         if ($search = $request->input('search', '')) {
-            $like = '%'.$search.'%';
+            $like = '%' . $search . '%';
             $builder->where(function ($query) use ($like) {
                 $query->where('name', 'like', $like);
             });
         }
 
         $celebrity = $builder->get();
-        foreach ($celebrity as $k=>$v)
-        {
-            $celebrity[$k]['influencenum']=Redis::zscore('zset1',$v);
+        foreach ($celebrity as $k => $v) {
+            $celebrity[$k]['influencenum'] = Redis::zscore('zset1', $v);
         }
 
         return $this->success($celebrity);
     }
 
 
-        //投票
+    //投票
     public function restrank(Request $request)
     {
         $y = date('Y', time());
         $m = date('m', time());
         $d = date('d', time());
         $w = date('W', time());
-        $user['id']=$request->input('user_id');
+        $user['id'] = $request->input('user_id');
         if ($request->has('celebrity_id') && $request->has('mingci')) {
             $rank = new Ranking();
             $rank->celebrity_id = $request->input('celebrity_id');
@@ -332,7 +351,7 @@ class ListController extends Controller
             $rank->mingci = $request->input('mingci');
             $rank->save();
             return $this->success('添加成功');
-        }else{
+        } else {
             return $this->success('明星id和票数不齐');
         }
     }

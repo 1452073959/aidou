@@ -24,7 +24,7 @@ class TaskController extends AdminController
             $grid->column('award');
             $grid->column('num');
             $grid->column('type')->using([
-                '1' => '新手任务', '2' => '日常',
+                '1' => '周任务', '2' => '日任务',
             ]);
             $grid->column('what','行为')->using([
 
@@ -82,7 +82,7 @@ class TaskController extends AdminController
             $form->text('award')->required();
             $form->text('num')->required();
             $form->radio('type')->options([
-                '1' => '新手任务', '2' => '日常',
+                '1' => '周任务', '2' => '日任务',
             ])->required();
             $form->radio('what', '行为')->options([
 

@@ -35,6 +35,10 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             DB::table('users')->update(['boxtwo'=>5,'box'=>6]);
         })->twiceDaily(7, 22);
+        $schedule->call(function () {
+            $b=Task::where('type',1)->pluck('id');
+            DB::table('users_task')->whereIn('task_id',$b)->update(['status'=>1,'sum'=>0]);
+        })->weeklyOn(1, '8:00');
     }
 
     /**

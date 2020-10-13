@@ -109,6 +109,10 @@ class ListController extends Controller
 
         $user = auth('api')->user();
 //        dd($user);
+
+        if($user['votenum']<=0){
+            return $this->success('票数不足');
+        }
         $y = date('Y', time());
         $m = date('m', time());
         $d = date('d', time());

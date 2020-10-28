@@ -362,5 +362,18 @@ class ListController extends Controller
             return $this->success('明星id和票数不齐');
         }
     }
+    ///
+    //
+    public function collnum(Request $request)
+    {
+        if ($request->has('celebrity_id')) {
+            $collnum = Celebrity::find(5);
+            $collnum->influencenum=$collnum['influencenum']+1;
+            $collnum->save();
+            return $this->success($collnum);
+        } else {
+            return $this->success('明星id未传');
+        }
+    }
 
 }

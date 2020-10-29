@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Redis;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Cache;
-
+use Storage;
 class ListController extends Controller
 {
     //获取有哪些月份
@@ -367,13 +367,23 @@ class ListController extends Controller
     public function collnum(Request $request)
     {
         if ($request->has('celebrity_id')) {
-            $collnum = Celebrity::find(5);
-            $collnum->influencenum=$collnum['influencenum']+1;
-            $collnum->save();
-            return $this->success($collnum);
+            $user = auth('api')->user();
+            if($user['true']==1){
+                $user['true']=2;
+                $user->save();
+                $collnum = Celebrity::find($request->input('celebrity_id'));
+                $collnum->influencenum=$collnum['influencenum']+1;
+                $collnum->save();
+                return $this->success($collnum);
+            }else{
+                return $this->success('已入驻过');
+            }
+
         } else {
             return $this->success('明星id未传');
         }
     }
+
+
 
 }

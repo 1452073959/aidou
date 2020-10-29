@@ -24,9 +24,9 @@ class CelebrityController extends AdminController
             $grid->column('backimage')->image();
             $grid->column('wenzi','文字');
             $grid->column('influencenum','数量');
-
+            $grid->column('qrcode','小程序码')->image();;
             $grid->column('created_at');
-            $grid->column('updated_at')->sortable();
+//            $grid->column('updated_at')->sortable();
 //            $grid->disableDeleteButton();
 //            $grid->disableEditButton();
             $grid->disableQuickEditButton();
@@ -76,6 +76,7 @@ class CelebrityController extends AdminController
             $form->image('backimage')->disableRemove()->uniqueName()->required();
             $form->text('wenzi','文字')->required();
             $form->number('influencenum');
+
             $form->disableResetButton();
             $form->disableViewCheck();
             $form->disableEditingCheck();

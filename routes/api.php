@@ -59,7 +59,7 @@ $api->version('v1', [
         // 我的签到
         $api->get('sign', 'Api\UserController@sign');
 
-
+        $api->get('collnum','Api\ListController@collnum');
         //拼呗
         //项目发起
         $api->post('spellstore','Api\SpellController@store');
@@ -125,7 +125,11 @@ $api->version('v1', [
     $api->get('setting','ElseController@setting');
     //投诉接口
     $api->post('complaint','ElseController@complaint');
-    $api->get('collnum','ListController@collnum');
+    //小程序码
+    $api->get('ma','ElseController@ma');
+
+
+
 //测试路由
     Route::get('version', function() {
         return 'this is version v1';

@@ -32,14 +32,14 @@ class UserController extends AdminController
             //关闭新增按钮
             $grid->disableCreateButton();
             // 禁用过滤器按钮
-            $grid->disableFilterButton();
+//            $grid->disableFilterButton();
             $grid->disableViewButton();
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
 
             $grid->filter(function (Grid\Filter $filter) {
-                $filter->equal('id');
-        
+//                $filter->equal('id');
+                $filter->like('nickname', '名称');
             });
         });
     }

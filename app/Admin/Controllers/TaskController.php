@@ -91,6 +91,7 @@ class TaskController extends AdminController
                 8 => '完成所有', 9 => '加入后援会', 10 => '参与抽奖'
             ])->required();
             $form->text('url','小程序')->help('仅对跳转小程序有用')->required();
+            $form->text('path','小程序路径')->help('仅对跳转小程序有用')->required();
             $form->number('linit', '行为次数')->default(1)->required();
             $form->number('order', '排序')->help('数字越大越靠前')->required();
             $form->disableResetButton();
